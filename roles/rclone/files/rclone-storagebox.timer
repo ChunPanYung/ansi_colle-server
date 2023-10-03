@@ -1,0 +1,11 @@
+# It will start the service with same name but different file extension.
+[Unit]
+Description=RClone Backup to storagebox weekly
+
+[Timer]
+# Start 5 minutes after boot and again every week while the system is running.
+OnBootSec=5min
+OnUnitActiveSec=1w
+
+[Install]
+WantedBy=timers.target

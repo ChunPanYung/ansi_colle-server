@@ -1,0 +1,16 @@
+---
+# handlers file for samba
+- name: Enabled and start samba
+  become: true
+  ansible.builtin.systemd:
+    name: smb
+    daemon_reload: true
+    state: restarted
+    enabled: true
+
+- name: Permit traffic for samba service
+  ansible.posix.firewalld:
+    service: samba
+    permanent: true
+    immediate: true
+    state: enabled

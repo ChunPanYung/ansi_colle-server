@@ -1,0 +1,15 @@
+---
+# handlers file for jenkins
+- name: Create systemd unit files for jenkins container
+  become: true
+  containers.podman.podman_generate_systemd:
+    name: jenkins_server
+    dest: /etc/systemd/system/
+
+- name: Enabled and restart container
+  become: true
+  ansible.builtin.systemd:
+    name: container-jenkins_server
+    daemon_reload: true
+    state: restarted
+    enabled: true

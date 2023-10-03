@@ -1,0 +1,13 @@
+---
+# tasks file for podman
+- name: Install podman via dnf
+  become: true
+  when: ansible_pkg_mgr == 'dnf'
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+  loop:
+    - podman
+    - podman-compose
+    - buildah
+  notify:
+    - Enable and start podman.socket

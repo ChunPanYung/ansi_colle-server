@@ -1,0 +1,15 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  tasks:
+    # replace these tasks with whatever you find suitable to test
+    - name: Copy something to test use of synchronize module
+      ansible.builtin.copy:
+        src: /etc/hosts
+        dest: /tmp/hosts-from-controller
+        mode: '0644'
+
+    - name: "Include config"
+      ansible.builtin.include_role:
+        name: "config"

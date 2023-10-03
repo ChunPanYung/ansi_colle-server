@@ -1,0 +1,39 @@
+---
+# tasks file for onlyoffice
+- name: Pull onlyoffice image
+  containers.podman.podman_image:
+    name: docker.io/onlyoffice/documentserver:latest
+    force: true
+
+- name: Get content of secret file
+  no_log: true
+  ansible.builtin.slurp:
+    src: /etc/secrets/onlyoffice_jwt_secret
+  register: onlyoffice_output
+
+- name: Fail playbook if variable is not defined
+  ansible.builtin.fail:
+    msg: onlyoffice_jwt_secret is not defined.
+  when: onlyoffice_output['content'] == ""
+
+- name: Print secret keys
+  ansible.builtin.debug:
+    var: onlyoffice_output['content']
+
+- name: Run onlyoffice container
+  no_log: true
+  become: true
+  containers.podman.podman_container:
+    name: onlyoffice_server
+    image: docker.io/onlyoffice/documentserver:latest
+    state: started
+    restart_policy: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    env:
+      JWT_SECRET: "{{ onlyoffice_output['content'] | b64decode }}"
+    user: root
+  notify:
+    - Create systemd unit files for onlyoffice container
+    - Enabled and restart container

@@ -1,0 +1,8 @@
+---
+# tasks file for ansible
+- name: Install ansible and sshpass for ssh connection
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - ansible
+      - sshpass

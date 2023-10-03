@@ -1,0 +1,61 @@
+---
+- name: Setup ansible virtualenv
+  become: true
+  block:
+
+    - name: Create directory for git repo
+      ansible.builtin.file:
+        path: /opt/venv/ansible/
+        state: directory
+        mode: '0755'
+
+    - name: Install pre-requisite for ansible development
+      ansible.builtin.dnf:
+        name:
+          - gcc
+          - python3-pip
+          - python3-devel
+          - openssl-devel
+          - python3-libselinux
+
+    - name: Instal virtualenv, required by ansible module
+      ansible.builtin.dnf:
+        name: python3-virtualenv
+
+    - name: Create virtual environment and upgrade pip
+      ansible.builtin.pip:
+        name: pip
+        virtualenv: "{{ venv_ansible_dir }}"
+        extra_args: --upgrade
+
+    - name: Install ansible on virtualenv
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        virtualenv: "{{ venv_ansible_dir }}"
+        extra_args: --upgrade
+      loop:
+        - poetry
+        - pre-commit
+        - setuptools
+
+    - name: Install ansible and linting tools on virtualenv
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        virtualenv: "{{ venv_ansible_dir }}"
+      loop:
+        - ansible
+        - ansible-lint
+        - yamllint
+
+    - name: Install molecule on virtualenv
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        virtualenv: "{{ venv_ansible_dir }}"
+      loop:
+        - molecule
+        - molecule-plugins
+
+    - name: Install pywinrm on virtualenv
+      ansible.builtin.pip:
+        name: pywinrm
+        virtualenv: "{{ venv_ansible_dir }}"
