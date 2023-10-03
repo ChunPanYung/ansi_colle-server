@@ -1,0 +1,6 @@
+---
+major_changes:
+  - "Install poetry."
+  - Add settings to bashrc, skip if it is not interactive.
+  - bash setting, Enable pinentry and ssh-agent.
+  - Role for install and enable Samba.

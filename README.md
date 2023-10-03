@@ -1,1 +1,3 @@
-# ansi_colle.server
+# Ansible Collection - ansi_colle.server
+
+Documentation for the collection.

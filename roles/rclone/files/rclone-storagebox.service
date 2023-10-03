@@ -1,0 +1,6 @@
+[Unit]
+Description=RClone Backup
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/rclone-storagebox

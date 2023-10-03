@@ -1,0 +1,69 @@
+---
+# tasks file for dev_env
+- name: Create directory for git repo
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Repos/"
+    state: directory
+    mode: '0755'
+
+- name: Setup TTY variable for gpg pinentry
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    regexp: '^export GPG_TTY='
+    line: 'export GPG_TTY=$(tty)  # Setup for pinentry'
+
+- name: Install pinentry for gpg passphrase input in terminal
+  become: true
+  ansible.builtin.dnf:
+    name: pinentry
+  when: ansible_facts['os_family'] == 'RedHat'
+
+- name: Ensure private directory on keys and secrets
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0700'
+  loop:
+    - "{{ ansible_user_dir }}/.ssh"
+    - "{{ ansible_user_dir }}/.gnupg/private-keys-v1.d"
+
+- name: Install poetry for handling virtualenv
+  become: true
+  ansible.builtin.dnf:
+    name: poetry
+
+- name: Create poetry directory
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/pypoetry/"
+    mode: '0755'
+    state: directory
+
+- name: Create configuration file for poetry
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/pypoetry/config.toml"
+    mode: '0644'
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+
+- name: Create virtualenv within project
+  community.general.ini_file:
+    path: "{{ ansible_user_dir }}/.config/pypoetry/config.toml"
+    section: virtualenvs
+    option: in-project
+    value: "true"
+    mode: '0644'
+
+- name: Skip loading bash settings if it is not interactive
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    insertbefore: BOF
+    line: '[[ $- == *i* ]] || return  # return if it is not interactive'
+
+- name: Customize bash settings
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    marker: "# {mark} ansi_colle.server.dev_env BLOCK"
+    block: |
+      export GPG_TTY=$(tty)  # Use pinentry for gpg password
+      eval `ssh-agent`  # Enable ssh-agent on startup

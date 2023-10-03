@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Chun Pan Yung
+  description: |
+    Create dev environment on local account, minimal system configureation.
+
+  license: MIT
+
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - "38"
+
+  galaxy_tags: []
+
+dependencies: []
