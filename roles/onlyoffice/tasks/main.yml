@@ -8,7 +8,7 @@
 - name: Get content of secret file
   no_log: true
   ansible.builtin.slurp:
-    src: /etc/secrets/onlyoffice_jwt_secret
+    src: "{{ secret_dir }}/onlyoffice_jwt_secret"
   register: onlyoffice_output
 
 - name: Fail playbook if variable is not defined
