@@ -8,10 +8,6 @@
         state: directory
         mode: '0755'
 
-    - name: Explicitly include variable
-      ansible.builtin.include_vars:
-        file: main.yml
-
     - name: Create directory for storing secrets
       ansible.builtin.file:
         path: "{{ secrets_dir }}"
