@@ -22,7 +22,5 @@
       tags: dev_env
     - role: ansi_colle.server.jenkins
       tags: jenkins
-    - role: comm_config
-      tags: common
     - role: ansi_colle.linux.powershell
       tags: powershell

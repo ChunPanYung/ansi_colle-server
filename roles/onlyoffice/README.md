@@ -6,16 +6,14 @@ Install onlyoffice with Podman
 Requirements
 ------------
 
-- podman
+- ansi_colle.server.config: it will define `secret_dir` variable.
+- ansi_colle.server.podman: make sure podman is installed.
 
 Role Variables
 --------------
 
-Requires the following variables from `ansi_colle.server.podman`:
-```
-podman_data
-podman_config
-```
+`"{{ secret_dir }}/onlyoffice_jwt_secret"` must be defined.
+It is a REST API keys used to connect onlyoffice server to another application.
 
 Dependencies
 ------------

@@ -8,24 +8,8 @@
         state: directory
         mode: '0755'
 
-    - name: Explicitly include variable
-      ansible.builtin.include_vars:
-        file: main.yml
-
     - name: Create directory for storing secrets
       ansible.builtin.file:
-        path: "{{ secrets_dir }}"
+        path: "{{ secret_dir }}"
         state: directory
         mode: '0755'
-
-    - name: Install dnf-plugin for system upgrade
-      ansible.builtin.dnf:
-        name: dnf-plugin-system-upgrade
-
-    - name: Packages for post-upgrade tasks
-      ansible.builtin.dnf:
-        name: "{{ item }}"
-      loop:
-        - remove-retired-packages
-        - symlinks
-        - rpmconf
