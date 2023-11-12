@@ -13,15 +13,3 @@
         path: "{{ secret_dir }}"
         state: directory
         mode: '0755'
-
-    - name: Install dnf-plugin for system upgrade
-      ansible.builtin.dnf:
-        name: dnf-plugin-system-upgrade
-
-    - name: Packages for post-upgrade tasks
-      ansible.builtin.dnf:
-        name: "{{ item }}"
-      loop:
-        - remove-retired-packages
-        - symlinks
-        - rpmconf
