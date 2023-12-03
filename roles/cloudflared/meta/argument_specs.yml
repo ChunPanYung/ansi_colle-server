@@ -7,8 +7,4 @@ argument_specs:
       - Depends on ansi_colle.server.config role.
       - Depends on variable named 'config_secret_dir'.
     author: Chun Pan Yung
-    options:
-      config_secret_dir:
-        type: "str"
-        required: true
-        description: "Directory location for storing secrets."
+    options: {}
