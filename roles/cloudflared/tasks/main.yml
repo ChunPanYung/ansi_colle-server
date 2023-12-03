@@ -1,7 +1,7 @@
 ---
 - name: Create temporary directory
   ansible.builtin.tempfile:
-  state: directory
+    state: directory
   register: cloudflared_tmpdir
 
 - name: Download executables for linux x64 system
