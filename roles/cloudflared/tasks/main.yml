@@ -31,3 +31,9 @@
 - name: Warning
   ansible.builtin.debug:
     msg: This role will only install cloudflared, it does not configure it.
+
+- name: Remove temporary directory and its content
+  ansible.builtin.tempfile:
+    path: "{{ cloudflared_tmpdir.path }}"
+    state: absent
+  when: cloudflared_tmpdir.path is defined
