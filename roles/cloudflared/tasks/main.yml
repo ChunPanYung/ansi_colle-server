@@ -6,7 +6,7 @@
 
 - name: Download executables for linux x64 system
   ansible.builtin.get_url:
-    url: "{{ powershell_api.json.assets[19].browser_download_url }}"
+    url: "{{ cloudflared_github_api.json.assets[19].browser_download_url }}"
     dest: "{{ cloudflared_tmpdir.path }}/cloudflared.rpm"
     mode: '0644'
 
@@ -33,7 +33,7 @@
     msg: This role will only install cloudflared, it does not configure it.
 
 - name: Remove temporary directory and its content
-  ansible.builtin.tempfile:
+  ansible.builtin.file:
     path: "{{ cloudflared_tmpdir.path }}"
     state: absent
   when: cloudflared_tmpdir.path is defined
