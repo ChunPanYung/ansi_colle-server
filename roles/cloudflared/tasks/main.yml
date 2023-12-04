@@ -1,4 +1,10 @@
 ---
+- name: Retrieve information from github api
+  ansible.builtin.uri:
+    url: "{{ cloudflared_github_api }}"
+    return_content: true
+  register: cloudflared_api
+
 - name: Create temporary directory
   ansible.builtin.tempfile:
     state: directory
@@ -6,7 +12,7 @@
 
 - name: Download executables for linux x64 system
   ansible.builtin.get_url:
-    url: "{{ cloudflared_github_api.json.assets[19].browser_download_url }}"
+    url: "{{ cloudflared_api.json.assets[19].browser_download_url }}"
     dest: "{{ cloudflared_tmpdir.path }}/cloudflared.rpm"
     mode: '0644'
 
