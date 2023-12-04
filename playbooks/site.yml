@@ -24,3 +24,5 @@
       tags: jenkins
     - role: ansi_colle.linux.powershell
       tags: powershell
+    - role: ansi_colle.server.cloudflared
+      tags: cloudflared

@@ -10,6 +10,6 @@
 
     - name: Create directory for storing secrets
       ansible.builtin.file:
-        path: "{{ secret_dir }}"
+        path: "{{ config_secret_dir }}"
         state: directory
         mode: '0755'
