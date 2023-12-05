@@ -1,7 +1,11 @@
 ---
 name: Check git-cliff changelog Output
 run-name: Check git-cliff output and save it to variable
-'on': ['workflow_dispatch']
+'on':
+  push:
+    branches-ignore:  # do not execute on master/main branch
+      - master
+      - main
 jobs:
   git-cliff-changelog:
     name: Generate changelog
