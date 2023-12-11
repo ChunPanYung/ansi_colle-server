@@ -6,6 +6,7 @@ run-name: Check git-cliff output and save it to variable
     branches-ignore:  # do not execute on master/main branch
       - master
       - main
+
 jobs:
   git-cliff-changelog:
     name: Generate changelog
@@ -21,7 +22,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: --verbose
+          args: --latest
         env:
           OUTPUT: CHANGELOG.md
 
