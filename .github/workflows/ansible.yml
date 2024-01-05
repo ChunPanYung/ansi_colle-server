@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install ansible.posix via Ansible Galaxy
-        run: ansible-galaxy collection install ansible.posix
+        run: ansible-playbook $GITHUB_WORKSPACE/playbooks/install.yml
       - name: Run ansible-lint
         uses: ansible/ansible-lint@main
