@@ -25,13 +25,13 @@
     - name: Create virtual environment and upgrade pip
       ansible.builtin.pip:
         name: pip
-        virtualenv: "{{ venv_ansible_dir }}"
+        virtualenv: "{{ dev_venv_ansible_dir }}"
         extra_args: --upgrade
 
     - name: Install ansible on virtualenv
       ansible.builtin.pip:
         name: "{{ item }}"
-        virtualenv: "{{ venv_ansible_dir }}"
+        virtualenv: "{{ dev_venv_ansible_dir }}"
         extra_args: --upgrade
       loop:
         - poetry
@@ -41,7 +41,7 @@
     - name: Install ansible and linting tools on virtualenv
       ansible.builtin.pip:
         name: "{{ item }}"
-        virtualenv: "{{ venv_ansible_dir }}"
+        virtualenv: "{{ dev_venv_ansible_dir }}"
       loop:
         - ansible
         - ansible-lint
@@ -50,7 +50,7 @@
     - name: Install molecule on virtualenv
       ansible.builtin.pip:
         name: "{{ item }}"
-        virtualenv: "{{ venv_ansible_dir }}"
+        virtualenv: "{{ dev_venv_ansible_dir }}"
       loop:
         - molecule
         - molecule-plugins
@@ -58,4 +58,4 @@
     - name: Install pywinrm on virtualenv
       ansible.builtin.pip:
         name: pywinrm
-        virtualenv: "{{ venv_ansible_dir }}"
+        virtualenv: "{{ dev_venv_ansible_dir }}"
