@@ -17,9 +17,9 @@
     - role: ansi_colle.server.onlyoffice
       tags: onlyoffice
     - role: ansi_colle.server.ansible
-      tags: dev_env
-    - role: ansi_colle.server.dev_env
-      tags: dev_env
+      tags: ansible
+    - role: ansi_colle.server.dev
+      tags: dev
     - role: ansi_colle.server.jenkins
       tags: jenkins
     - role: ansi_colle.linux.powershell
