@@ -22,7 +22,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: --latest
+          args: --unreleased
         env:
           OUTPUT: CHANGELOG.md
 
