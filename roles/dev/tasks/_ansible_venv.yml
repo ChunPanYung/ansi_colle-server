@@ -2,7 +2,6 @@
 - name: Setup ansible virtualenv
   become: true
   block:
-
     - name: Create directory for git repo
       ansible.builtin.file:
         path: /opt/venv/ansible/
