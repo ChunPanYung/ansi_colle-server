@@ -9,9 +9,6 @@ authors:
 description: Configure home server.
 license:
   - GPL-2.0-or-later
-dependencies:
-  "community.general": "*"
-  "containers.podman": "*"
 
 repository: http://example.com/repository
 

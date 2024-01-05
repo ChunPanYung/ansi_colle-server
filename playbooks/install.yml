@@ -10,6 +10,7 @@
       loop:
         - community.general
         - containers.podman
+        - ansible.posix
 
     - name: Install custom collections
       community.general.ansible_galaxy_install:
