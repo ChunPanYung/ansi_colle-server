@@ -13,3 +13,4 @@ repos:
       - id: no-commit-to-branch
       - id: mixed-line-ending
       - id: trailing-whitespace
+      - id: ansible-lint
