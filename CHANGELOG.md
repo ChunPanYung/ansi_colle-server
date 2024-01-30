@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- Use `git-cliff` instead of `antsibull-changelog`.
+- Remove depreated file.
+
+### Features
+
+- Add GitHub Action. (#5)
+
+## [unreleased]
+
 ### Bug Fixes
 
 - (Ansible-Lint): Change variable name.
