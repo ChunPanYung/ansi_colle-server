@@ -8,7 +8,7 @@
 
 - name: Compare to current kind version if exist
   ansi_colle.mods.cmp_pkg:
-    command_name: kind --version
+    command_name: kind
     desired_version: "{{ kind_api.json.tag_name[1:] }}"
   register: kind_cmp
 
