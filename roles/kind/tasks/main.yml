@@ -1,0 +1,8 @@
+---
+# tasks file for kubernetes
+- name: Retrieve information from github api
+  ansible.builtin.uri:
+    url: "{{ kind_github_api }}"
+    return_content: true
+  register: kind_api
+
