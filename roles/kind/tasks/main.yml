@@ -2,7 +2,7 @@
 # tasks file for kubernetes
 - name: Retrieve information from github api
   ansible.builtin.uri:
-    url: "{{ kind_github_api }}"
+    url: https://api.github.com/repos/kubernetes-sigs/kind/releases/latest
     return_content: true
   register: kind_api
 
