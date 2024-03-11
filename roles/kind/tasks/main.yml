@@ -22,7 +22,7 @@
 
     - name: Download executables for linux x64 system
       ansible.builtin.get_url:
-        url: "{{ kind_api.json.assets[8].browser_download_url }}"
+        url: "{{ kind_api.json.assets[4].browser_download_url }}"
         dest: "{{ kind_tempdir.path }}/kind.tgz"
         mode: '0644'
 
@@ -32,3 +32,8 @@
     #     src: "{{ kind_tempdir.path }}/kind.tgz"
     #     dest: /usr/local/bin/kind
     #     remote_src: true
+
+    - name: Remove temporary directory
+      ansible.builtin.file:
+        path: "{{ kind_tempdir.path }}"
+        state: absent
