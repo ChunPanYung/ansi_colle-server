@@ -12,28 +12,10 @@
     desired_version: "{{ kind_api.json.tag_name[1:] }}"
   register: kind_cmp
 
-- name: Execute the following if version is not the latest
+- name: Download executables for linux x64 system
+  become: true
   when: (kind_cmp.rc == 2) or (kind_cmp.rc == 1)
-  block:
-    - name: Create temporary directory
-      ansible.builtin.tempfile:
-        state: directory
-      register: kind_tempdir
-
-    - name: Download executables for linux x64 system
-      ansible.builtin.get_url:
-        url: "{{ kind_api.json.assets[4].browser_download_url }}"
-        dest: "{{ kind_tempdir.path }}/kind.tgz"
-        mode: '0644'
-
-    # - name: Extract file to /usr/local/bin directory
-    #   become: true
-    #   ansible.builtin.unarchive:
-    #     src: "{{ kind_tempdir.path }}/kind.tgz"
-    #     dest: /usr/local/bin/kind
-    #     remote_src: true
-
-    - name: Remove temporary directory
-      ansible.builtin.file:
-        path: "{{ kind_tempdir.path }}"
-        state: absent
+  ansible.builtin.get_url:
+    url: "{{ kind_api.json.assets[4].browser_download_url }}"
+    dest: /usr/local/bin/kind
+    mode: '0755'
