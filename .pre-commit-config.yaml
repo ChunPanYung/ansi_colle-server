@@ -13,3 +13,7 @@ repos:
       - id: no-commit-to-branch
       - id: mixed-line-ending
       - id: trailing-whitespace
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v6.22.2
+    hooks:
+      - id: ansible-lint

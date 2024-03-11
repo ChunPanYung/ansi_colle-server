@@ -26,3 +26,5 @@
       tags: powershell
     - role: ansi_colle.server.cloudflared
       tags: cloudflared
+    - role: ansi_colle.server.kind
+      tags: kind
