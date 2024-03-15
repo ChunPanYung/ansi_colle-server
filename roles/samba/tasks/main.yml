@@ -7,7 +7,16 @@
       ansible.builtin.dnf:
         name: samba
       notify:
-        - Enabled and start samba
+        - Enabled and restart samba
+
+    - name: Permit traffic for samba service
+      ansible.posix.firewalld:
+        service: samba
+        permanent: true
+        immediate: true
+        state: enabled
+        zone: FedoraWorkstation
+      notify:
         - Permit traffic for samba service
 
     - name: Create directory for samba sharing
