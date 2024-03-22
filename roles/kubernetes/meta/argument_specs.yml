@@ -6,4 +6,10 @@ argument_specs:
       - Main entrypoint for kubernetes role.
     author:
       - Chun Pan Yung
-    options: {}
+    options:
+      cluster_type:
+        type: "str"
+        required: false
+        default: "kind"
+        description:
+          - "Cluster type needs to be isntalled."
