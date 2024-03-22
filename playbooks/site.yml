@@ -6,6 +6,8 @@
       prompt: "BECOME password"
 
   roles:
+    - role: ansi_colle.linux.home_config
+      tags: home_config
     - role: ansi_colle.server.config
       tags: config
     - role: ansi_colle.server.rclone
