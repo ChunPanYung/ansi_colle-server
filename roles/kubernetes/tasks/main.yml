@@ -14,7 +14,9 @@
 
 - name: Download executables for linux x64 system
   become: true
-  when: (kind_cmp.rc == 2) or (kind_cmp.rc == 1)
+  when:
+    - (kind_cmp.rc == 2) or (kind_cmp.rc == 1)
+    - kubernetes_type == 'kind'
   ansible.builtin.get_url:
     url: "{{ kind_api.json.assets[4].browser_download_url }}"
     dest: /usr/local/bin/kind

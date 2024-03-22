@@ -7,7 +7,7 @@ argument_specs:
     author:
       - Chun Pan Yung
     options:
-      cluster_type:
+      kubernetes_type:
         type: "str"
         required: false
         default: "kind"
