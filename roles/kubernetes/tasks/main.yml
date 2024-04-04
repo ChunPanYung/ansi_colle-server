@@ -28,3 +28,10 @@
   when: ansible_os_family == 'RedHat'
   ansible.builtin.dnf:
     name: helm
+
+- name: Create global directory for storing helm related settings
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/etc/helm
+    state: directory
+    mode: '0755'
