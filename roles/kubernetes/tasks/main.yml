@@ -15,7 +15,7 @@
         desired_version: "{{ kind_api.json.tag_name[1:] }}"
       register: kind_cmp
 
-    - name: Download executables for linux x64 system
+    - name: Download executables for linux x64 system if update is required
       become: true
       when: (kind_cmp.rc == 2) or (kind_cmp.rc == 1)
       ansible.builtin.get_url:
@@ -23,15 +23,33 @@
         dest: /usr/local/bin/kind
         mode: '0755'
 
+- name: Install and Update kubectl if needed
+  vars:
+    kubectl_link: https://dl.k8s.io/release
+  block:
+    - name: Get latest kubectl version
+      ansible.builtin.uri:
+        url: "{{ kubectl_link }}/stable.txt"
+        return_content: true
+      register: kubectl_output
+
+    - name: Compare to current kind version if exist
+      ansi_colle.mods.cmp_pkg:
+        command_name: kubectl
+        desired_version: "{{ kubectl_output.content }}"
+
+    - name: Download kubectl for linux if update is required
+      when: (kind_cmp.rc == 2) or (kind_cmp.rc == 1)
+      become: true
+      vars:
+        kubectl_linux_64: "{{ kubectl_output.content }}/bin/linux/amd64/kubectl"
+      ansible.builtin.get_url:
+        url: "{{ kubectl_link }}/{{ kubectl_linux_64 }}"
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
 - name: Install helm, kubernetes package manager
   become: true
   when: ansible_os_family == 'RedHat'
   ansible.builtin.dnf:
     name: helm
-
-- name: Create global directory for storing helm related settings
-  become: true
-  ansible.builtin.file:
-    path: /usr/local/etc/helm
-    state: directory
-    mode: '0755'
