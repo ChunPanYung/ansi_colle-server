@@ -6,5 +6,5 @@
       prompt: "BECOME password"
 
   roles:
-    - role: ansi_colle.server.kind
-      tags: kind
+    - role: ansi_colle.server.kubernetes
+      tags: kubernetes

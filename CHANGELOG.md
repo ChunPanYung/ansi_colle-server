@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-04-04
+
+### Bug Fixes
+
+- Missing dependencies.
+
+### Features
+
+- Variable to specify cluster type.
+- Install helm kubernetes package manager.
+- Add `home_config` role to playbook.
+- Create directory for storing settings.
+- [**breaking**] Setup `group_vars` depending on OS.
+
+### Refactor
+
+- Always to set permit traffic for samba.
+- Rename variable and install only if type is `kind`.
+
+### Revert
+
+- Role back to named 'kubernetes'.
+
 ## [1.0.0]
 
 ### Bug Fixes

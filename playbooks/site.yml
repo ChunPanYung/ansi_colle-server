@@ -6,6 +6,8 @@
       prompt: "BECOME password"
 
   roles:
+    - role: ansi_colle.linux.home_config
+      tags: home_config
     - role: ansi_colle.server.config
       tags: config
     - role: ansi_colle.server.rclone
@@ -26,5 +28,5 @@
       tags: powershell
     - role: ansi_colle.server.cloudflared
       tags: cloudflared
-    - role: ansi_colle.server.kind
-      tags: kind
+    - role: ansi_colle.server.kubernetes
+      tags: kubernetes
