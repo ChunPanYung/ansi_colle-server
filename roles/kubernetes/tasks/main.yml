@@ -37,6 +37,7 @@
       ansi_colle.mods.cmp_pkg:
         command_name: kubectl
         desired_version: "{{ kubectl_output.content }}"
+        arg: 'version'
       register: kubectl_cmp
 
     - name: Download kubectl for linux if update is required
