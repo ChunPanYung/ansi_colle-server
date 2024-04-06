@@ -23,6 +23,13 @@
         dest: /usr/local/bin/kind
         mode: '0755'
 
+    - name: Create directory for kind configuration
+      become: true
+      ansible.builtin.file:
+        path: /usr/local/etc/kind/
+        state: directory
+        mode: '0755'
+
 - name: Install and Update kubectl if needed
   vars:
     kubectl_link: https://dl.k8s.io/release
