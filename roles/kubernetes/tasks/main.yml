@@ -34,9 +34,10 @@
         - /usr/local/etc/kind/
 
     - name: Setup README.txt file for directory description
+      become: true
       ansible.builtin.lineinfile:
         path: /var/lib/kind/README.txt
-        line: 'This directory is created by Ansible, not by package.'
+        line: 'This directory is created by Ansible.'
         create: true
         mode: '0644'
 
