@@ -30,14 +30,16 @@
         state: directory
         mode: '0755'
       loop:
-        - /var/lib/kind/
+        - /var/lib/kind/volumes/
         - /usr/local/etc/kind/
 
     - name: Setup README.txt file for directory description
       become: true
       ansible.builtin.lineinfile:
         path: /var/lib/kind/README.txt
-        line: 'This directory is created by Ansible.'
+        line: >
+          This directory is created by Ansible,
+          it is for storing kind data.
         create: true
         mode: '0644'
 
