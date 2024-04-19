@@ -14,8 +14,8 @@
       tags: rclone
     - role: ansi_colle.server.dnf_automatic
       tags: dnf_automatic
-    - role: ansi_colle.server.podman
-      tags: podman
+    - role: ansi_colle.server.containers
+      tags: containers
     - role: ansi_colle.server.onlyoffice
       tags: onlyoffice
     - role: ansi_colle.server.ansible
@@ -28,5 +28,3 @@
       tags: powershell
     - role: ansi_colle.server.cloudflared
       tags: cloudflared
-    - role: ansi_colle.server.kubernetes
-      tags: kubernetes
