@@ -23,16 +23,6 @@
         dest: /usr/local/bin/kind
         mode: '0755'
 
-    - name: Create directory for kind configuration
-      become: true
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-        mode: '0755'
-      loop:
-        - /var/lib/kind/volumes/
-        - /usr/local/etc/kind/
-
     - name: Setup README.txt file for directory description
       become: true
       ansible.builtin.lineinfile:

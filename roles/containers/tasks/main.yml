@@ -1,5 +1,12 @@
 ---
 # tasks file for containers
+- name: Create directory for kind configuration
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/etc/containers/
+    state: directory
+    mode: '0755'
+
 - name: Install podman via dnf
   become: true
   when:
