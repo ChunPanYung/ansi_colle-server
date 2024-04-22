@@ -1,7 +1,7 @@
 ---
 # tasks file for kubernetes
 - name: Install kind when variable 'kubernetes_typ' is 'kind'
-  when: containers_stacks is contains('podman')
+  when: containers_stack is contains('podman')
   block:
     - name: Retrieve information from github api
       ansible.builtin.uri:

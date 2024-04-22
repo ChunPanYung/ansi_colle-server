@@ -4,7 +4,7 @@
   become: true
   when:
     - ansible_pkg_mgr == 'dnf'
-    - containers_stacks is contains('podman')
+    - containers_stack is contains('podman')
   ansible.builtin.dnf:
     name:
       - podman
