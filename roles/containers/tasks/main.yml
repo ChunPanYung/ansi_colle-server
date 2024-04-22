@@ -2,7 +2,9 @@
 # tasks file for containers
 - name: Install podman via dnf
   become: true
-  when: ansible_pkg_mgr == 'dnf'
+  when:
+    - ansible_pkg_mgr == 'dnf'
+    - containers_stacks is contains('podman')
   ansible.builtin.dnf:
     name:
       - podman
@@ -10,3 +12,7 @@
       - buildah
   notify:
     - Enable and start podman.socket
+
+- name: Install kubernetes
+  ansible.builtin.include_tasks:
+    file: _kubernetes.yml
