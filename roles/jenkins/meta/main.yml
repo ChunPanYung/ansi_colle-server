@@ -14,4 +14,4 @@ galaxy_info:
   galaxy_tags: []
 
 dependencies:
-  - role: ansi_colle.server.podman
+  - role: ansi_colle.server.containers

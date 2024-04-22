@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- Variable name and condition.
+- Role name dependencies.
+
+### Features
+
+- Install kubectl.
+- [**breaking**] Merge podman and kubernetes role into one.
+
+### Miscellaneous Tasks
+
+- Setup pre-commit config file.
+
+### Styling
+
+- Change variable name with role name prefix.
+
 ## [1.1.0] - 2024-04-04
 
 ### Bug Fixes

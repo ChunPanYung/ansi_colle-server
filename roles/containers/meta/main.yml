@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Chun Pan Yung
-  description: Install podman
+  description: Install container-related software.
 
   license: GPL-2.0-or-later
 

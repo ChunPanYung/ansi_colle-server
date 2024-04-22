@@ -1,0 +1,25 @@
+---
+# tasks file for containers
+- name: Create directory for kind configuration
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/etc/containers/
+    state: directory
+    mode: '0755'
+
+- name: Install podman via dnf
+  become: true
+  when:
+    - ansible_pkg_mgr == 'dnf'
+    - containers_stack is contains('podman')
+  ansible.builtin.dnf:
+    name:
+      - podman
+      - podman-compose
+      - buildah
+  notify:
+    - Enable and start podman.socket
+
+- name: Install kubernetes
+  ansible.builtin.include_tasks:
+    file: _kubernetes.yml

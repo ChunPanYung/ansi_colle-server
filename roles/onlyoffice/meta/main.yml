@@ -15,4 +15,4 @@ galaxy_info:
 
 dependencies:
   - role: ansi_colle.server.config
-  - role: ansi_colle.server.podman
+  - role: ansi_colle.server.containers
