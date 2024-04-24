@@ -1,7 +1,7 @@
 ---
 # tasks file for kubernetes
 - name: Install kind when variable 'kubernetes_typ' is 'kind'
-  when: containers_stack is contains('podman')
+  when: containers_stack is contains('kind')
   block:
     - name: Retrieve information from github api
       ansible.builtin.uri:
@@ -34,6 +34,7 @@
         mode: '0644'
 
 - name: Install and Update kubectl if needed
+  when: containers_stack is contains('kubernetes')
   vars:
     kubernetes_kubectl_link: https://dl.k8s.io/release
   block:
@@ -62,6 +63,8 @@
 
 - name: Install helm, kubernetes package manager
   become: true
-  when: ansible_os_family == 'RedHat'
+  when:
+    - ansible_os_family == 'RedHat'
+    - containers_stack is contains('kubernetes')
   ansible.builtin.dnf:
     name: helm
