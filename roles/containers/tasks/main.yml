@@ -21,5 +21,6 @@
     - Enable and start podman.socket
 
 - name: Install kubernetes
+  when: containers_stack is contains('kubernetes')
   ansible.builtin.include_tasks:
     file: _kubernetes.yml
