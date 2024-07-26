@@ -22,10 +22,22 @@
     - "{{ ansible_user_dir }}/.gnupg/private-keys-v1.d"
     - "{{ ansible_user_dir }}/.keys"
 
-- name: Install pipx
+- name: Install dev tools
   become: true
   ansible.builtin.dnf:
-    name: pipx
+    name:
+      - pipx
+      - gcc
+      - python3-pip
+      - python3-devel
+
+- name: Install python tools
+  community.general.pipx:
+    name: "{{ item }}"
+  loop:
+    - black
+    - pdm
+    - pre-commit
 
 - name: Skip loading bash settings if it is not interactive
   ansible.builtin.lineinfile:
