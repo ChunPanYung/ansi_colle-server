@@ -22,10 +22,10 @@
     - "{{ ansible_user_dir }}/.gnupg/private-keys-v1.d"
     - "{{ ansible_user_dir }}/.keys"
 
-- name: Install poetry for handling virtualenv
+- name: Install pipx
   become: true
   ansible.builtin.dnf:
-    name: poetry
+    name: pipx
 
 - name: Skip loading bash settings if it is not interactive
   ansible.builtin.lineinfile:
