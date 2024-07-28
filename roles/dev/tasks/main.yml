@@ -22,16 +22,17 @@
     - "{{ ansible_user_dir }}/.gnupg/private-keys-v1.d"
     - "{{ ansible_user_dir }}/.keys"
 
-- name: Install dev tools
+- name: Install python dev tools
   become: true
   ansible.builtin.dnf:
     name:
-      - pipx
       - gcc
+      - pipx
       - python3-pip
       - python3-devel
       - black
       - pre-commit
+      - ruff
 
 - name: Install python tools via pipx
   community.general.pipx:
