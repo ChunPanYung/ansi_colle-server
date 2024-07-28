@@ -21,8 +21,8 @@ readme = "README.md"
 distribution = false
 
 [tool.pdm.scripts]
-install = "ansible-playbook ansi_colle.linux.install"
-exec = "ansible-playbook ansi_colle.linux.linux --ask-become-pass --inventory"
+install = "ansible-playbook ansi_colle.server.install"
+exec = "ansible-playbook ansi_colle.server.site --ask-become-pass --inventory"
 changelog = "git-cliff --prepend CHANGELOG.md --unreleased --tag"
 
 [tool.pdm.version]
