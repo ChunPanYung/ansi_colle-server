@@ -3,6 +3,12 @@
 - name: Install ansible and sshpass for ssh connection
   become: true
   ansible.builtin.dnf:
-    name:
-      - ansible
-      - sshpass
+    name: sshpass
+
+- name: Install ansible tools via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+  loop:
+    - ansible
+    - ansible-lint
+    - yamllint
