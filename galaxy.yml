@@ -1,14 +1,14 @@
 ---
 namespace: ansi_colle
 name: server
-version: 1.0.0
+version: 1.2.0
 readme: README.md
 authors:
   - Chun Pan Yung <31672021+ChunPanYung@users.noreply.github.com>
 
 description: Configure home server.
 license:
-  - GPL-2.0-or-later
+  - MIT
 
 repository: http://example.com/repository
 

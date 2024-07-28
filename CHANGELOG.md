@@ -2,17 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.2.0] - 2024-07-28
 
 ### Bug Fixes
 
+- Collection name.
 - Variable name and condition.
 - Role name dependencies.
 
+### Documentation
+
+- [**breaking**] Remove repository from pyproject file.
+
 ### Features
 
+- [**breaking**] Merge podman and kubernetes role into containers role. (#9)
+- [**breaking**] Remove poetry configuration, use pdm instead.
+- Install dev tools and python tools.
+- [**breaking**] Migrate ansible setup into its own role.
+- Install ruff.
+- Add setuptools to dev role.
+- Add argument_spec file for role.
+- Add git-cliff tool.
+- [**breaking**] Remove password prompt.
+- Ignore .pdm-python file.
 - Install kubectl.
 - [**breaking**] Merge podman and kubernetes role into one.
+
+### Refactor
+
+- [**breaking**] Remove unused variable.
 
 ### Miscellaneous Tasks
 
