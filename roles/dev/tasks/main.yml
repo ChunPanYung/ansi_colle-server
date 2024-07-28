@@ -30,14 +30,14 @@
       - gcc
       - python3-pip
       - python3-devel
+      - black
+      - pre-commit
 
-- name: Install python tools
+- name: Install python tools via pipx
   community.general.pipx:
     name: "{{ item }}"
   loop:
-    - black
     - pdm
-    - pre-commit
 
 - name: Skip loading bash settings if it is not interactive
   ansible.builtin.lineinfile:

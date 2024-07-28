@@ -5,7 +5,7 @@
   ansible.builtin.dnf:
     name: sshpass
 
-- name: Install ansible molecule dependencies
+- name: Install ansible and its dependencies
   become: true
   ansible.builtin.dnf:
     name:
@@ -15,10 +15,8 @@
       - openssl-devel
       - python3-libselinux
       - python3-setuptools
+      - ansible
 
 - name: Install ansible tools via pipx
   community.general.pipx:
-    name: "{{ item }}"
-  loop:
-    - ansible
-    - ansible-dev-tools
+    name: ansible-dev-tools
