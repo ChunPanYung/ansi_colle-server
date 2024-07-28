@@ -40,6 +40,7 @@
     name: "{{ item }}"
   loop:
     - pdm
+    - git-cliff
 
 - name: Skip loading bash settings if it is not interactive
   ansible.builtin.lineinfile:
