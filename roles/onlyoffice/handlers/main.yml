@@ -9,7 +9,7 @@
     env:
       JWT_SECRET: "{{ onlyoffice_output['content'] | b64decode }}"
 
-- name: Enabled and restart container
+- name: Enabled and restart onlyoffice container
   become: true
   no_log: true
   ansible.builtin.systemd:

@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2024-09-30
+
+### Bug Fixes
+
+- Fix condition when deciding to execute task.
+- Syntax update.
+
+### Features
+
+- Specify variable on role.
+- Only execute when variable list contains kubernetes.
+
+### Styling
+
+- More specific on task function.
+
 ## [1.2.0] - 2024-07-28
 
 ### Bug Fixes

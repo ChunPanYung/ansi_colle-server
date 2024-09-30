@@ -1,7 +1,7 @@
 ---
 # tasks file for kubernetes
 - name: Install kind when variable 'kubernetes_typ' is 'kind'
-  when: containers_stack is contains('podman')
+  when: containers_stack is contains('kind')
   block:
     - name: Retrieve information from github api
       ansible.builtin.uri:
@@ -11,7 +11,7 @@
 
     - name: Compare to current kind version if exist
       ansi_colle.mods.cmp_pkg:
-        command_name: kind
+        name: kind --version
         desired_version: "{{ kubernetes_kind_api.json.tag_name[1:] }}"
       register: kubernetes_kind_cmp
 
@@ -45,9 +45,8 @@
 
     - name: Compare to current kind version if exist
       ansi_colle.mods.cmp_pkg:
-        command_name: kubectl
+        name: kubectl version
         desired_version: "{{ kubernetes_out.content }}"
-        arg: 'version'
       register: kubernetes_kubectl_cmp
 
     - name: Download kubectl for linux if update is required
