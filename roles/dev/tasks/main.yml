@@ -22,32 +22,25 @@
     - "{{ ansible_user_dir }}/.gnupg/private-keys-v1.d"
     - "{{ ansible_user_dir }}/.keys"
 
-- name: Install poetry for handling virtualenv
+- name: Install python dev tools
   become: true
   ansible.builtin.dnf:
-    name: poetry
+    name:
+      - gcc
+      - pipx
+      - python3-pip
+      - python3-devel
+      - python3-setuptools
+      - black
+      - pre-commit
+      - ruff
 
-- name: Create poetry directory
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/pypoetry/"
-    mode: '0755'
-    state: directory
-
-- name: Create configuration file for poetry
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/pypoetry/config.toml"
-    mode: '0644'
-    state: touch
-    modification_time: preserve
-    access_time: preserve
-
-- name: Create virtualenv within project
-  community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/pypoetry/config.toml"
-    section: virtualenvs
-    option: in-project
-    value: "true"
-    mode: '0644'
+- name: Install python tools via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+  loop:
+    - pdm
+    - git-cliff
 
 - name: Skip loading bash settings if it is not interactive
   ansible.builtin.lineinfile:

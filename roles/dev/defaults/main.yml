@@ -1,3 +1,0 @@
----
-# ansi_colle.server.dev_env defaults/
-dev_venv_ansible_dir: "/opt/venv/ansible/"

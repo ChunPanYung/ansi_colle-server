@@ -1,0 +1,8 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for dev role.
+    description:
+      - Main entry point for dev role.
+    author: Chun Pan Yung
+    options: {}
