@@ -15,7 +15,6 @@
   ansible.builtin.dnf:
     name:
       - podman
-      - podman-compose
       - buildah
   notify:
     - Enable and start podman.socket
