@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2024-11-01
+
+### Features
+
+- Ensure rclone will run on next boot if it misses.
+- [**breaking**] Remove podman-compose.
+- Enable podman auto-update timer and configure.
+
+### Refactor
+
+- Use universal module to install rclone.
+
 ## [1.2.1] - 2024-09-30
 
 ### Bug Fixes

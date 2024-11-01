@@ -15,10 +15,31 @@
   ansible.builtin.dnf:
     name:
       - podman
-      - podman-compose
       - buildah
   notify:
     - Enable and start podman.socket
+
+- name: Override default timer settings for podman auto-update
+  become: true
+  notify:
+    - Reload and restart podman auto-update timer
+  block:
+    - name: Enable timer service
+      ansible.builtin.systemd_service:
+        name: podman-auto-update.timer
+        enabled: true
+
+    - name: Create directory for podman auto-update timer
+      ansible.builtin.file:
+        path: /etc/systemd/system/podman-auto-update.timer.d
+        state: directory
+        mode: '0755'
+
+    - name: Copy timer file to override configuration for podman auto-update timer
+      ansible.builtin.copy:
+        src: podman-auto-update.conf
+        dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
+        mode: '0644'
 
 - name: Install kubernetes
   when: containers_stack is contains('kubernetes')
