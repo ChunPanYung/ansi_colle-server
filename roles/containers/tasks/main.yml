@@ -36,7 +36,7 @@
         mode: '0755'
 
     - name: Copy timer file to override configuration for podman auto-update timer
-      ansible.builtiln.copy:
+      ansible.builtin.copy:
         src: podman-auto-update.conf
         dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
         mode: '0644'
