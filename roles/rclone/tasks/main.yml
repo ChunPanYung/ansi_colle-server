@@ -1,16 +1,9 @@
 ---
 # tasks file for rclone
-- name: Install rclone on RedHat based OS
+- name: Install rclone
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.package:
     name: rclone
-  when: ansible_os_family == 'RedHat'
-
-- name: Install rclone on Debian based OS
-  become: true
-  ansible.builtin.apt:
-    name: rclone
-  when: ansible_os_family == 'Debian'
 
 - name: Execute systemd related tasks with sudo
   become: true
