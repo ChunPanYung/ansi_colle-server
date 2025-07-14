@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2025-07-14
+
+### Documentation
+
+- Readme file.
+
+### Features
+
+- [**breaking**] Remove unused role.
+- [**breaking**] Remove dependencies from install.
+- [**breaking**] Remove most of pdm config from pyproject file.
+
 ## [1.2.2] - 2024-11-01
 
 ### Features
