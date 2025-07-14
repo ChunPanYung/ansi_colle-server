@@ -3,26 +3,22 @@ name = "ansi_colle-server"
 dynamic = ["version"]
 description = "Namespace that stores Ansible collections."
 
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 authors = [
-    {name = "Chun Pan Yung", email = "31672021+ChunPanYung@users.noreply.github.com"},
+  { name = "Chun Pan Yung", email = "31672021+ChunPanYung@users.noreply.github.com" },
 ]
 
-dependencies = [
-    "ansible>=9.2.0",
-    "tomli-w>=1.0.0",
-]
+dependencies = ["ansible>=9.2.0", "tomli-w>=1.0.0"]
 requires-python = "==3.12.*"
 readme = "README.md"
-
-[tool.pdm]
-distribution = false
 
 [tool.pdm.scripts]
 install = "ansible-playbook ansi_colle.server.install"
 exec = "ansible-playbook ansi_colle.server.site --ask-become-pass --inventory"
 changelog = "git-cliff --prepend CHANGELOG.md --unreleased --tag"
 
-[tool.pdm.version]
-source = "scm"
+[project.optional-dependencies]
+log = ["git-cliff", "uv"]
+test = ["validate-pyproject", "pre-commit"]
+dev = ["ansible-dev-tools", "go-task-bin"]

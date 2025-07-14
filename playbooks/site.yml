@@ -2,8 +2,6 @@
 - name: Execute roles on server
   hosts: all
   roles:
-    - role: ansi_colle.linux.home_config
-      tags: home_config
     - role: ansi_colle.server.config
       tags: config
     - role: ansi_colle.server.rclone
@@ -16,13 +14,5 @@
         containers_stack: ['podman']
     - role: ansi_colle.server.onlyoffice
       tags: onlyoffice
-    - role: ansi_colle.server.ansible
-      tags: ansible
-    - role: ansi_colle.server.dev
-      tags: dev
-    - role: ansi_colle.server.jenkins
-      tags: jenkins
-    - role: ansi_colle.linux.powershell
-      tags: powershell
     - role: ansi_colle.server.cloudflared
       tags: cloudflared
