@@ -5,7 +5,6 @@ Collection of role for configuring home server.
 ## Requirements
 
 [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
 To run this playbook from `bash`:
 
 ```bash
