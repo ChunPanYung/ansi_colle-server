@@ -10,7 +10,7 @@
 
     - name: Configure unattended-upgrade
       ansible.builtin.copy:
-        src: unattended-upgrade-local
+        src: 52unattended-upgrade-local
         dest: /etc/apt/apt.conf.d/
         owner: root
         group: root
