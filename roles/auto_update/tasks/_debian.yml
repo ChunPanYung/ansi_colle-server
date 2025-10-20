@@ -1,0 +1,17 @@
+---
+- name: Execute following tasks with sudo
+  become: true
+  block:
+    - name: Install Auto Update and Auto Upgrade
+      ansible.builtin.apt:
+        name:
+          - unattended-upgrade  # auto install of updates
+          - apt-config-auto-update  # auto update package cache
+
+    - name: Configure unattended-upgrade
+      ansible.builtin.copy:
+        src: unattended-upgrade-local
+        dest: /etc/apt/apt.conf.d/
+        owner: root
+        group: root
+        mode: '0755'

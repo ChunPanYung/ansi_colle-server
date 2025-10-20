@@ -3,26 +3,15 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Install community collections
+    - name: Install dependencies and collections
       community.general.ansible_galaxy_install:
         type: collection
-        name: "{{ item }}"
-      loop:
-        - community.general
-        - containers.podman
-        - ansible.posix
-
-    - name: Install custom collections
-      community.general.ansible_galaxy_install:
-        type: collection
-        name: "{{ item }}"
-      loop:
-        - git+https://github.com/ChunPanYung/ansi_colle-slim_os.git,main
-        - git+https://github.com/ChunPanYung/ansi_colle-mods.git,main
+        force: true  # force upgrade
+        requirements_file: "{{ playbook_dir }}/../requirements.yml"
 
     - name: Install this collection
       vars:
         this_collection: git+https://github.com/ChunPanYung/ansi_colle-server.git
       community.general.ansible_galaxy_install:
         type: collection
-        name: "{{ this_collection }},{{ git_version | default('main') }}"
+        name: "{{ this_collection }},{{ git_branch | default('main') }}"

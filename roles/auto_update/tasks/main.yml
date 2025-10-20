@@ -1,0 +1,11 @@
+---
+# roles/auto_update/tasks/
+- name: Execute task file if it is RedHat-based OS
+  when: ansible_os_family == 'RedHat'
+  ansible.builtin.include_tasks:
+    file: _fedora.yml
+
+- name: Execute task file if it is Debian-based OS
+  when: ansible_os_family == 'Debian'
+  ansible.builtin.include_tasks:
+    file: _debian.yml

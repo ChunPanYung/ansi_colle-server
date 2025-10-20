@@ -6,8 +6,8 @@
       tags: config
     - role: ansi_colle.server.rclone
       tags: rclone
-    - role: ansi_colle.server.dnf_automatic
-      tags: dnf_automatic
+    - role: ansi_colle.server.auto_update
+      tags: auto_update
     - role: ansi_colle.server.containers
       tags: containers
       vars:

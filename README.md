@@ -2,11 +2,9 @@
 
 Collection of role for configuring home server.
 
-Requirements
-------------
+## Requirements
 
 [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
 To run this playbook from `bash`:
 
 ```bash
@@ -23,3 +21,7 @@ ansible-playbook ansi_colle.server.install
 ansible-playbook ansi_colle.server.site --connection=local \
   --inventory 127.0.0.1, --ask-become-pass --verbose
 ```
+
+## Development
+
+To setup development environment: `uv sync && source .venv/bin/activate`

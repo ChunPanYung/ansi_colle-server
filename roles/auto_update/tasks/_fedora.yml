@@ -25,23 +25,16 @@
         group: root
         mode: '0755'
 
-    - name: Overrride.conf for dnf-automatic-install.timer
-      ansible.builtin.file:
-        path: "{{ dnf_automatic_setup_dir }}/time.conf"
-        state: touch
-        owner: root
-        group: root
-        mode: '0644'
-        modification_time: preserve
-        access_time: preserve
-
     - name: Setup OnCalender time for dnf-automatic-install.timer
       community.general.ini_file:
         path: "{{ dnf_automatic_setup_dir }}/time.conf"
         section: Timer
+        no_extra_spaces: true
         option: OnCalendar
         value: Sat 07:00
         mode: '0644'
-        no_extra_spaces: true
+        owner: root
+        group: root
+        backup: true
       notify:
         - Reload systemd daemon
