@@ -1,40 +1,11 @@
 ---
-- name: Execute following tasks with sudo
-  become: true
-  block:
-    - name: Install dnf-automatic
-      ansible.builtin.dnf:
-        name: dnf-automatic
-      notify:
-        - Enable dnf-automatic timer
+# roles/auto_update/tasks/
+- name: Execute task file if it is RedHat-based OS
+  when: ansible_os_family == 'RedHat'
+  ansible.builtin.include_tasks:
+    file: _fedora.yml
 
-    - name: Configure dnf automatic.conf
-      community.general.ini_file:
-        path: /etc/dnf/automatic.conf
-        section: commands
-        option: reboot
-        value: when-changed
-        backup: true
-        mode: '0644'
-
-    - name: Directory for dnf-automatic-install override configuration
-      ansible.builtin.file:
-        path: "{{ dnf_automatic_setup_dir }}"
-        state: directory
-        owner: root
-        group: root
-        mode: '0755'
-
-    - name: Setup OnCalender time for dnf-automatic-install.timer
-      community.general.ini_file:
-        path: "{{ dnf_automatic_setup_dir }}/time.conf"
-        section: Timer
-        no_extra_spaces: true
-        option: OnCalendar
-        value: Sat 07:00
-        mode: '0644'
-        owner: root
-        group: root
-        backup: true
-      notify:
-        - Reload systemd daemon
+- name: Execute task file if it is Debian-based OS
+  when: ansible_os_family == 'Debian'
+  ansible.builtin.include_tasks:
+    file: _debian.yml
