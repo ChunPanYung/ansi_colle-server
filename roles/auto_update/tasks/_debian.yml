@@ -8,9 +8,9 @@
           - unattended-upgrades  # auto install of updates
           - apt-config-auto-update  # auto update package cache
 
-    - name: Configure unattended-upgrade
+    - name: Configure unattended-upgrades
       ansible.builtin.copy:
-        src: 52unattended-upgrade-local
+        src: 52unattended-upgrades-local
         dest: /etc/apt/apt.conf.d/
         owner: root
         group: root
