@@ -1,0 +1,8 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for auto_update role.
+    description:
+      - Main entry point for auto_update role.
+    author: Chun Pan Yung
+    options: {}
