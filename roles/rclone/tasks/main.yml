@@ -10,7 +10,7 @@
   block:
     - name: Create config directory
       ansible.builtin.file:
-        path: "/usr/local/etc/rclone/"
+        path: "/etc/rclone/"
         state: directory
         mode: '0755'
 
