@@ -1,3 +1,20 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# handlers file for base
+- name: Reload systemd daemon
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and restart sshd.service
+  become: true
+  ansible.builtin.systemd:
+    name: sshd.service
+    state: restarted
+    enabled: true
+
+- name: Change 'EDITOR' variable in environment file
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    regexp: '^EDITOR='
+    line: 'EDITOR="/usr/bin/micro"'
+    backup: true

@@ -1,6 +1,7 @@
 ---
 # tasks file for base
 - name: Install following packages on all server
+  become: true
   ansible.builtin.package:
     name:
       - sudo
@@ -10,4 +11,18 @@
       - curl
       - tree
       - micro
-      - openssh-server
+
+- name: Install and enable sshd.service
+  become: true
+  ansible.builtin.package:
+    name: openssh-server
+  notify:
+    - Reload systemd daemon
+    - Enable and restart sshd.service
+
+- name: Install 'micro' editor
+  become: true
+  ansible.builtin.package:
+    name: micro
+  notify:
+    - Change 'EDITOR' variable in environment file
