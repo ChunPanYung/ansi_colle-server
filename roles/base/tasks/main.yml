@@ -6,7 +6,6 @@
     name:
       - sudo
       - lsd
-      - bat
       - git
       - curl
       - tree
@@ -25,3 +24,10 @@
     name: micro
   notify:
     - Change 'EDITOR' variable in environment file
+
+- name: Install following packages on all server
+  become: true
+  ansible.builtin.package:
+    name: bat
+  notify:
+    - Create alias if 'bat' cli is installed

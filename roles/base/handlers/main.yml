@@ -18,3 +18,11 @@
     regexp: '^EDITOR='
     line: 'EDITOR="/usr/bin/micro"'
     backup: true
+
+- name: Create alias if 'bat' cli is installed
+  when: ansible_os_family == 'Debian'
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    regexp: '^alias bat='
+    line: 'alias bat="batcat"'
+    backup: true
