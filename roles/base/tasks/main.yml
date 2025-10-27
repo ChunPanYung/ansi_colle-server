@@ -1,0 +1,13 @@
+---
+# tasks file for base
+- name: Install following packages on all server
+  ansible.builtin.package:
+    name:
+      - sudo
+      - lsd
+      - bat
+      - git
+      - curl
+      - tree
+      - micro
+      - openssh-server
