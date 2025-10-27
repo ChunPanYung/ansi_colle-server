@@ -2,8 +2,8 @@
 - name: Execute roles on server
   hosts: all
   roles:
-    - role: ansi_colle.server.config
-      tags: config
+    - role: ansi_colle.server.base
+      tags: base
     - role: ansi_colle.server.rclone
       tags: rclone
     - role: ansi_colle.server.auto_update
