@@ -10,7 +10,6 @@
       - git
       - curl
       - tree
-      - micro
 
 - name: Install and enable sshd.service
   become: true
