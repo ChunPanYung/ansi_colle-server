@@ -1,2 +1,0 @@
----
-containers_stack: ['podman', 'kind']

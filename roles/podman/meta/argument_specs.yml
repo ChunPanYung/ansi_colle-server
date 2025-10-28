@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for the podman role.
+    description:
+      - Main entrypoint for podman role.
+    author:
+      - Chun Pan Yung
+    options: {}

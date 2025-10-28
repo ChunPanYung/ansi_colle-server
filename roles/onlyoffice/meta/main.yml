@@ -13,6 +13,4 @@ galaxy_info:
 
   galaxy_tags: []
 
-dependencies:
-  - role: ansi_colle.server.config
-  - role: ansi_colle.server.containers
+dependencies: []

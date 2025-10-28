@@ -8,11 +8,7 @@
       tags: rclone
     - role: ansi_colle.server.auto_update
       tags: auto_update
-    - role: ansi_colle.server.containers
-      tags: containers
-      vars:
-        containers_stack: ['podman']
+    - role: ansi_colle.server.podman
+      tags: podman
     - role: ansi_colle.server.onlyoffice
       tags: onlyoffice
-    - role: ansi_colle.server.cloudflared
-      tags: cloudflared
