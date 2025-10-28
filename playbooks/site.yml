@@ -10,9 +10,5 @@
       tags: auto_update
     - role: ansi_colle.server.podman
       tags: podman
-      vars:
-        containers_stack: ['podman']
     - role: ansi_colle.server.onlyoffice
       tags: onlyoffice
-    - role: ansi_colle.server.cloudflared
-      tags: cloudflared
