@@ -1,0 +1,45 @@
+---
+# tasks file for base
+- name: Install following packages on all server
+  become: true
+  ansible.builtin.package:
+    name:
+      - sudo
+      - lsd
+      - git
+      - curl
+      - tree
+
+- name: Install and enable sshd.service
+  become: true
+  ansible.builtin.package:
+    name: openssh-server
+  notify:
+    - Reload systemd daemon
+    - Enable and restart sshd.service
+
+- name: Install 'micro' editor
+  become: true
+  ansible.builtin.package:
+    name: micro
+  notify:
+    - Change 'EDITOR' variable in environment file
+
+- name: Install following packages on all server
+  become: true
+  ansible.builtin.package:
+    name: bat
+  notify:
+    - Create alias if 'bat' cli is installed
+
+- name: Install tmux
+  become: true
+  ansible.builtin.package:
+    name: tmux
+
+- name: Create tmux.conf file
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    mode: '0644'
+    backup: true

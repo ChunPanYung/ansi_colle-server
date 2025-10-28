@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2025-10-28
+
+### 🚀 Features
+
+- Auto update for debian os. (#14)
+- [**breaking**] Update rclone config role. (#18)
+- [**breaking**] Remove role `config` from collection.
+- Base configuration role.
+
+### 🚜 Refactor
+
+- Remove repeated installation.
+- Bat cli installation on its own task.
+
+### Documentation
+
+- use `uv` to setup developer tools and pyproject.
+- `taskfile.dist.yml` for easier build and deployment.
+
 ## [1.3.0] - 2025-07-14
 
 ### Documentation

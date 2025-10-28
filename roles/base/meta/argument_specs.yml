@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for base role.
+    description:
+      - Main entry point for base role.
+      - A base configuration for all servers.
+    author: Chun Pan Yung
+    options: {}

@@ -7,19 +7,19 @@
       ansible.builtin.uri:
         url: https://api.github.com/repos/kubernetes-sigs/kind/releases/latest
         return_content: true
-      register: kubernetes_kind_api
+      register: __kubernetes_kind_api
 
     - name: Compare to current kind version if exist
       ansi_colle.mods.cmp_pkg:
         name: kind --version
-        desired_version: "{{ kubernetes_kind_api.json.tag_name[1:] }}"
-      register: kubernetes_kind_cmp
+        desired_version: "{{ __kubernetes_kind_api.json.tag_name[1:] }}"
+      register: __kubernetes_kind_cmp
 
     - name: Download executables for linux x64 system if update is required
       become: true
-      when: (kubernetes_kind_cmp.rc == 2) or (kubernetes_kind_cmp.rc == 1)
+      when: (__kubernetes_kind_cmp.rc == 2) or (__kubernetes_kind_cmp.rc == 1)
       ansible.builtin.get_url:
-        url: "{{ kubernetes_kind_api.json.assets[4].browser_download_url }}"
+        url: "{{ __kubernetes_kind_api.json.assets[4].browser_download_url }}"
         dest: /usr/local/bin/kind
         mode: '0755'
 
@@ -35,27 +35,27 @@
 
 - name: Install and Update kubectl if needed
   vars:
-    kubernetes_kubectl_link: https://dl.k8s.io/release
+    __kubernetes_kubectl_link: https://dl.k8s.io/release
   block:
     - name: Get latest kubectl version
       ansible.builtin.uri:
-        url: "{{ kubernetes_kubectl_link }}/stable.txt"
+        url: "{{ __kubernetes_kubectl_link }}/stable.txt"
         return_content: true
-      register: kubernetes_out
+      register: __kubernetes_out
 
     - name: Compare to current kind version if exist
       ansi_colle.mods.cmp_pkg:
         name: kubectl version
-        desired_version: "{{ kubernetes_out.content }}"
-      register: kubernetes_kubectl_cmp
+        desired_version: "{{ __kubernetes_out.content }}"
+      register: __kubernetes_kubectl_cmp
 
     - name: Download kubectl for linux if update is required
-      when: (kubernetes_kubectl_cmp.rc == 2) or (kubernetes_kubectl_cmp.rc == 1)
+      when: (__kubernetes_kubectl_cmp.rc == 2) or (__kubernetes_kubectl_cmp.rc == 1)
       become: true
       vars:
-        kubectl_linux_64: "{{ kubernetes_out.content }}/bin/linux/amd64/kubectl"
+        kubectl_linux_64: "{{ __kubernetes_out.content }}/bin/linux/amd64/kubectl"
       ansible.builtin.get_url:
-        url: "{{ kubernetes_kubectl_link }}/{{ kubectl_linux_64 }}"
+        url: "{{ __kubernetes_kubectl_link }}/{{ kubectl_linux_64 }}"
         dest: /usr/local/bin/kubectl
         mode: '0755'
 

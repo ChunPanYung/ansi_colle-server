@@ -1,2 +1,0 @@
----
-dnf_automatic_setup_dir: /etc/systemd/system/dnf-automatic-install.timer.d/
