@@ -1,12 +1,5 @@
 ---
 # tasks file for containers
-- name: Create directory for kind configuration
-  become: true
-  ansible.builtin.file:
-    path: /usr/local/etc/containers/
-    state: directory
-    mode: '0755'
-
 - name: Install podman via dnf
   become: true
   when:
@@ -40,8 +33,4 @@
         src: podman-auto-update.conf
         dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
         mode: '0644'
-
-- name: Install kubernetes
-  when: containers_stack is contains('kubernetes')
-  ansible.builtin.include_tasks:
-    file: _kubernetes.yml
+        backup: true

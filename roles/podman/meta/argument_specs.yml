@@ -1,16 +1,9 @@
 ---
 argument_specs:
   main:
-    short_description: Main entry point for the containers role.
+    short_description: Main entry point for the podman role.
     description:
-      - Main entrypoint for containers role.
+      - Main entrypoint for podman role.
     author:
       - Chun Pan Yung
-    options:
-      kubernetes_type:
-        type: "list"
-        elements: "str"
-        required: false
-        default: ['podman', 'kind']
-        description:
-          - "Cluster type needs to be isntalled."
+    options: {}
