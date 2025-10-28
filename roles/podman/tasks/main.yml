@@ -2,9 +2,7 @@
 # tasks file for containers
 - name: Install podman via dnf
   become: true
-  when:
-    - ansible_pkg_mgr == 'dnf'
-    - containers_stack is contains('podman')
+  when: ansible_os_family = 'RedHat'
   ansible.builtin.dnf:
     name:
       - podman
