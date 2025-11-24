@@ -7,6 +7,6 @@
 - name: Enable dnf-automatic timer
   become: true
   ansible.builtin.systemd:
-    name: dnf-automatic-install.timer
+    name: dnf-automatic.timer
     state: restarted
     enabled: true
