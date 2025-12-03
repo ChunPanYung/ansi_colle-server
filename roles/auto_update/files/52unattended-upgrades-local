@@ -1,10 +1,17 @@
 // Do automatic removal of unused packages after the upgrade
 // (equivalent to apt-get autoremove)
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 
 // Automatically reboot *WITHOUT CONFIRMATION* if
 // the file /var/run/reboot-required is found after the upgrade
 Unattended-Upgrade::Automatic-Reboot "true";
 
-// Only upgrade @Sun
-Unattended-Upgrade::Update_days {"Sun"};
+// Update daily
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+
+// Allow all packages origins to be updated, even third party repository
+Unattended-Upgrade::Origins-Pattern {
+    "origin=*";
+}
