@@ -4,9 +4,7 @@
   block:
     - name: Install Auto Update and Auto Upgrade
       ansible.builtin.apt:
-        name:
-          - unattended-upgrades  # auto install of updates
-          - apt-config-auto-update  # auto update package cache
+        name: unattended-upgrades  # auto install of updates
 
     - name: Configure unattended-upgrades
       ansible.builtin.copy:
