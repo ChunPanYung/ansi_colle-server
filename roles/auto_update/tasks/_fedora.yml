@@ -1,14 +1,12 @@
 ---
 - name: Execute following tasks with sudo
   become: true
-  vars:
-    _setup_dir: /etc/systemd/system/dnf-automatic-install.timer.d/
+  notify:
+    - Enable and restart dnf-automatic timer
   block:
     - name: Install dnf-automatic
       ansible.builtin.dnf:
         name: dnf-automatic
-      notify:
-        - Enable dnf-automatic timer
 
     - name: Configure dnf automatic.conf
       community.general.ini_file:
@@ -18,25 +16,3 @@
         value: when-changed
         backup: true
         mode: '0644'
-
-    - name: Directory for dnf-automatic-install override configuration
-      ansible.builtin.file:
-        path: "{{ _setup_dir }}"
-        state: directory
-        owner: root
-        group: root
-        mode: '0755'
-
-    - name: Setup OnCalender time for dnf-automatic-install.timer
-      community.general.ini_file:
-        path: "{{ _setup_dir }}/time.conf"
-        section: Timer
-        no_extra_spaces: true
-        option: OnCalendar
-        value: Sat 07:00
-        mode: '0644'
-        owner: root
-        group: root
-        backup: true
-      notify:
-        - Reload systemd daemon

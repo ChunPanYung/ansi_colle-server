@@ -1,12 +1,8 @@
 ---
-- name: Reload systemd daemon
+# roles/auto_update/handlers/
+- name: Enable and restart dnf-automatic timer
   become: true
   ansible.builtin.systemd:
-    daemon_reload: true
-
-- name: Enable dnf-automatic timer
-  become: true
-  ansible.builtin.systemd:
-    name: dnf-automatic-install.timer
+    name: dnf-automatic.timer
     state: restarted
     enabled: true
