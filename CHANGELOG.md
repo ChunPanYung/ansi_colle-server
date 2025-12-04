@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2025-12-04
+
+### 🚀 Features
+
+- Auto update all sources and remove unused dependencies.
+
+### 🐛 Bug Fixes
+
+- Linting error and remove unused role. (#20)
+- Dnf-automatic timer service name.
+
+### 🚜 Refactor
+
+- [**breaking**] Use default setting for update.
+
 ## [1.4.0] - 2025-10-28
 
 ### 🚀 Features
