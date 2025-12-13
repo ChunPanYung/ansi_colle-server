@@ -1,0 +1,41 @@
+---
+# tasks file for ./roles/mdns
+- name: Execute following with sudo
+  become: true
+  block:
+    - name: Install mdns packages needed for Debian Based OS
+      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+        name:
+          - systemd-resolved
+          - avahi-daemon
+
+    - name: Install mdns packages needed for RedHat Based OS
+      when: ansible_os_family = 'RedHat'
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - nss-mdns
+          - avahi
+
+    - name: Create directory for changing systemd default configuration
+      ansible.builtin.file:
+        path: /etc/systemd/resolved.conf.d
+        mode: 0755
+        state: directory
+
+    - name: Override default systemd service configuration
+      ansible.builtin.copy:
+        content: |
+          [Resolve]
+          MulticastDNS=yes
+        dest: /etc/systemd/resolved.conf.d/override.conf
+        mode: 0644
+
+    - name: Restart and enable systemd-resolved
+      ansible.builtin.systemd_service:
+        name: systemd-resolved
+        daemon_reload: true
+        enabled: true
+        state: restarted
+
