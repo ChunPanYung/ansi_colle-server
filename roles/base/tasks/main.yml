@@ -39,7 +39,6 @@
 - name: Setup firewall rule on Debian based OS
   become: true
   block:
-    - name: Install mdns packages needed for Debian Based OS
     - name: Check if ufw is installed
       failed_when: false
       changed_when: false
@@ -47,7 +46,7 @@
         cmd: command -v ufw
       register: mdns_firewall_check
 
-    - name: Allow mDNS on ufw
+    - name: Allow OpenSSH on ufw
       when: mdns_firewall_check.rc == 0
       community.general.ufw:
         rule: allow
