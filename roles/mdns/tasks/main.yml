@@ -16,7 +16,7 @@
     - name: Create directory for changing systemd default configuration
       ansible.builtin.file:
         path: /etc/systemd/resolved.conf.d
-        mode: 0755
+        mode: '0755'
         state: directory
 
     - name: Override default systemd service configuration
@@ -25,7 +25,7 @@
           [Resolve]
           MulticastDNS=yes
         dest: /etc/systemd/resolved.conf.d/override.conf
-        mode: 0644
+        mode: '0644'
 
     - name: Restart and enable systemd-resolved
       ansible.builtin.systemd_service:
@@ -33,4 +33,3 @@
         daemon_reload: true
         enabled: true
         state: restarted
-

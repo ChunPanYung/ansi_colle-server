@@ -10,9 +10,10 @@
           - avahi
 
     - name: Get default zone
+      failed_when: false
+      changed_when: false
       ansible.builtin.command:
         cmd: firewall-cmd --get-default-zone
-      failed_when: false
       register: mdns_firewall_check
 
     - name: Enable mdns on firewall-cmd
@@ -25,4 +26,3 @@
         permanent: true
         immediate: true
         zone: "{{ mdns_firewall_check.stdout }}"
-
