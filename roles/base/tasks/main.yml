@@ -5,7 +5,6 @@
   ansible.builtin.package:
     name:
       - sudo
-      # - lsd
       - git
       - curl
       - tree
@@ -17,13 +16,6 @@
   notify:
     - Reload systemd daemon
     - Enable and restart sshd.service
-
-- name: Install 'micro' editor
-  become: true
-  ansible.builtin.package:
-    name: micro
-  notify:
-    - Change 'EDITOR' variable in environment file
 
 - name: Install following packages on all server
   become: true
@@ -43,3 +35,24 @@
     dest: "{{ ansible_user_dir }}/.tmux.conf"
     mode: '0644'
     backup: true
+
+- name: Install EPEL for RedHat based OS
+  become: true
+  ansible.builtin.dnf:
+    name: epel-release
+
+
+- name: Specific install for Debian based OS
+  when: ansible_os_family == 'Debian'
+  become: true
+  block:
+    - name: Install micro text editor
+      ansible.builtin.apt:
+        name: micro
+      notify:
+        - Change 'EDITOR' variable in environment file
+
+    - name: Install lsd cli
+      ansible.builtin.apt:
+        name: lsd
+
