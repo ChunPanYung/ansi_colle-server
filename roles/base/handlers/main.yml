@@ -13,7 +13,7 @@
 
 - name: Change default text editor to micro
   become: true
-  community.general.alternativess:
+  community.general.alternatives:
     name: editor
     path: /usr/bin/micro
 

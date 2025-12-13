@@ -64,4 +64,3 @@
     - name: Install lsd cli
       ansible.builtin.apt:
         name: lsd
-
