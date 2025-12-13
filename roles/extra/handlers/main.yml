@@ -6,3 +6,10 @@
     name: editor
     path: /usr/bin/micro
 
+- name: Create alias if 'bat' cli is installed
+  when: ansible_os_family == 'Debian'
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    regexp: '^alias bat='
+    line: 'alias bat="batcat"'
+    backup: true

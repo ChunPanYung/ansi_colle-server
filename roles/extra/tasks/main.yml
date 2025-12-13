@@ -36,8 +36,7 @@
     - name: Install micro text editor
       ansible.builtin.apt:
         name: micro
-      notify:
-        - Change default text editor to micro
+      notify: Change default text editor to micro
 
     - name: Install lsd cli
       ansible.builtin.apt:
@@ -46,5 +45,4 @@
     - name: Install following packages on all server
       ansible.builtin.apt:
         name: bat
-      notify:
-        - Create alias if 'bat' cli is installed
+      notify: Create alias if 'bat' cli is installed
