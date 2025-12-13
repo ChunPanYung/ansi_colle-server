@@ -17,13 +17,6 @@
     - Reload systemd daemon
     - Enable and restart sshd.service
 
-- name: Install following packages on all server
-  become: true
-  ansible.builtin.package:
-    name: bat
-  notify:
-    - Create alias if 'bat' cli is installed
-
 - name: Install tmux
   become: true
   ansible.builtin.package:
@@ -64,3 +57,9 @@
     - name: Install lsd cli
       ansible.builtin.apt:
         name: lsd
+
+    - name: Install following packages on all server
+      ansible.builtin.apt:
+        name: bat
+      notify:
+        - Create alias if 'bat' cli is installed
