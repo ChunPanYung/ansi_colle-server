@@ -11,12 +11,6 @@
     state: restarted
     enabled: true
 
-- name: Change default text editor to micro
-  become: true
-  community.general.alternatives:
-    name: editor
-    path: /usr/bin/micro
-
 - name: Create alias if 'bat' cli is installed
   when: ansible_os_family == 'Debian'
   ansible.builtin.lineinfile:
