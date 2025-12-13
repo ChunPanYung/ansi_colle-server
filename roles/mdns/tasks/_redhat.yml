@@ -1,0 +1,28 @@
+---
+- name: Execute following with sudo
+  block:
+    - name: Install mdns packages needed for RedHat Based OS
+      when: ansible_os_family = 'RedHat'
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - nss-mdns
+          - avahi
+
+    - name: Get default zone
+      ansible.builtin.command:
+        cmd: firewall-cmd --get-default-zone
+      failed_when: false
+      register: mdns_firewall_check
+
+    - name: Enable mdns on firewall-cmd
+      when:
+        - mdns_firewall_check.rc == 0
+        - mdns_firewall_check.stdout | length > 1
+      ansible.posix.firewalld:
+        service: mdns
+        state: enabled
+        permanent: true
+        immediate: true
+        zone: "{{ mdns_firewall_check.stdout }}"
+
