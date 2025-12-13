@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Bootstrap file.
+- [**breaking**] Remove `.nvim.lua` file.
+- Prompt "Become password" when executing playbooks.
+- Disable `gpg_check` on installing `epel-release`.
 
 ### 🐛 Bug Fixes
 
@@ -15,6 +17,8 @@ All notable changes to this project will be documented in this file.
 ### 📚 Documentation
 
 - Update readme file.
+- Update `.editorconfig` file.
+- Update `.gitignore` file.
 
 ## [2.0.0] - 2025-12-13
 
