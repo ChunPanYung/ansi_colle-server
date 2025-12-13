@@ -12,5 +12,4 @@ if [[ -x "$(command -v ansible-galaxy)" ]]; then
 	ansible-galaxy collection install --upgrade community.general
 else
 	echo "Installation failed."
-	exit 1
 fi
