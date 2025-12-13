@@ -22,9 +22,10 @@ Collection of role for configuring home server.
 
   # Run this after update, it will ask you sudo password
   ansible-playbook ansi_colle.server.site --connection=local \
-    --inventory 127.0.0.1, --ask-become-pass --verbose
+    --inventory 127.0.0.1, --verbose
   ```
 
 ## Development
 
 To setup development environment: `uv sync && source .venv/bin/activate`
+Update all locked packages: `uv lock --upgrade`
