@@ -1,5 +1,6 @@
 ---
 - name: Execute following with sudo
+  become: true
   block:
     - name: Install mdns packages needed for Debian Based OS
       when: ansible_os_family == 'Debian'
