@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.1] - 2025-12-13
+
+### 🐛 Bug Fixes
+
+- Sudo to install and configure mdns.
+
 ## [1.6.0] - 2025-12-13
 
 ### 🚀 Features
