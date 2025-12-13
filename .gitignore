@@ -17,6 +17,4 @@ env-vars.yml
 __pycache__
 .venv
 .pytest_cache
-poetry.lock
-.pdm-python
 uv.lock
