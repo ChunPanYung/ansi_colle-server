@@ -1,9 +1,4 @@
 ---
-- name: Reload systemd daemon
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-
 - name: Enable and restart sshd.service
   become: true
   ansible.builtin.systemd:

@@ -13,6 +13,4 @@
   become: true
   ansible.builtin.package:
     name: openssh-server
-  notify:
-    - Reload systemd daemon
-    - Enable and restart sshd.service
+  notify: Enable and restart sshd.service
