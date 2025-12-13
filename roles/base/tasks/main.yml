@@ -14,3 +14,41 @@
   ansible.builtin.package:
     name: openssh-server
   notify: Enable and restart sshd.service
+
+- name: Setup firewall rule on RedHat based OS
+  become: true
+  block:
+    - name: Get default zone
+      failed_when: false
+      changed_when: false
+      ansible.builtin.command:
+        cmd: firewall-cmd --get-default-zone
+      register: mdns_firewall_check
+
+    - name: Enable ssh on firewall-cmd
+      when:
+        - mdns_firewall_check.rc == 0
+        - mdns_firewall_check.stdout | length > 1
+      ansible.posix.firewalld:
+        service: ssh
+        state: enabled
+        permanent: true
+        immediate: true
+        zone: "{{ mdns_firewall_check.stdout }}"
+
+- name: Setup firewall rule on Debian based OS
+  become: true
+  block:
+    - name: Install mdns packages needed for Debian Based OS
+    - name: Check if ufw is installed
+      failed_when: false
+      changed_when: false
+      ansible.builtin.command:
+        cmd: command -v ufw
+      register: mdns_firewall_check
+
+    - name: Allow mDNS on ufw
+      when: mdns_firewall_check.rc == 0
+      community.general.ufw:
+        rule: allow
+        name: OpenSSH
