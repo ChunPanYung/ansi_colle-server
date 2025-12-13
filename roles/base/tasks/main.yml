@@ -13,55 +13,42 @@
   become: true
   ansible.builtin.package:
     name: openssh-server
-  notify:
-    - Reload systemd daemon
-    - Enable and restart sshd.service
+  notify: Enable and restart sshd.service
 
-- name: Install tmux
-  become: true
-  ansible.builtin.package:
-    name: tmux
-
-- name: Create tmux.conf file
-  ansible.builtin.copy:
-    src: tmux.conf
-    dest: "{{ ansible_user_dir }}/.tmux.conf"
-    mode: '0644'
-    backup: true
-
-- name: Enable and use repository on RHEL based OS
-  when: ansible_os_family == 'RedHat'
+- name: Setup firewall rule on RedHat based OS
   become: true
   block:
-    - name: Ensure the crb repository is enabled
-      community.general.dnf_config_manager:
-        name: crb
+    - name: Get default zone
+      failed_when: false
+      changed_when: false
+      ansible.builtin.command:
+        cmd: firewall-cmd --get-default-zone
+      register: mdns_firewall_check
+
+    - name: Enable ssh on firewall-cmd
+      when:
+        - mdns_firewall_check.rc == 0
+        - mdns_firewall_check.stdout | length > 1
+      ansible.posix.firewalld:
+        service: ssh
         state: enabled
+        permanent: true
+        immediate: true
+        zone: "{{ mdns_firewall_check.stdout }}"
 
-    - name: Enable Extra Packages for Enterprise Linux
-      vars:
-        base_epel: https://dl.fedoraproject.org/pub/epel
-        base_version: "{{ ansible_distribution_major_version | int }}"
-      ansible.builtin.dnf:
-        name: "{{ base_epel }}/epel-release-latest-{{ base_version }}.noarch.rpm"
-        disable_gpg_check: true
-
-- name: Specific install for Debian based OS
-  when: ansible_os_family == 'Debian'
+- name: Setup firewall rule on Debian based OS
   become: true
   block:
-    - name: Install micro text editor
-      ansible.builtin.apt:
-        name: micro
-      notify:
-        - Change default text editor to micro
+    - name: Install mdns packages needed for Debian Based OS
+    - name: Check if ufw is installed
+      failed_when: false
+      changed_when: false
+      ansible.builtin.command:
+        cmd: command -v ufw
+      register: mdns_firewall_check
 
-    - name: Install lsd cli
-      ansible.builtin.apt:
-        name: lsd
-
-    - name: Install following packages on all server
-      ansible.builtin.apt:
-        name: bat
-      notify:
-        - Create alias if 'bat' cli is installed
+    - name: Allow mDNS on ufw
+      when: mdns_firewall_check.rc == 0
+      community.general.ufw:
+        rule: allow
+        name: OpenSSH

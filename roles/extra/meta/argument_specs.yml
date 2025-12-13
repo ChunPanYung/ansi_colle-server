@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for extra role.
+    description:
+      - Main entry point for extra role.
+      - It will install OS specific packages and configuration.
+    author: Chun Pan Yung
+    options: {}

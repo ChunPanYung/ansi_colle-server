@@ -3,7 +3,6 @@
   become: true
   block:
     - name: Install mdns packages needed for RedHat Based OS
-      become: true
       ansible.builtin.dnf:
         name:
           - nss-mdns
