@@ -8,8 +8,8 @@ Collection of role for configuring home server.
 To run this playbook from `bash`:
 
 ```bash
-export ANSIBLE_STDOUT_CALLBACK=yaml
-export ANSIBLE_LOAD_CALLBACK_PLUGINS=True
+export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
+export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
 
 ansible-galaxy collection install \
   git+https://github.com/ChunPanYung/ansi_colle-server.git
