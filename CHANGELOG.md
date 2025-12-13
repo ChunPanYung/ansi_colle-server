@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2025-12-13
+
+### 🚀 Features
+
+- Bootstrap file.
+
+### 🐛 Bug Fixes
+
+- Do not install `bat` on rhel base os.
+
+### 📚 Documentation
+
+- Update readme file.
+
 ## [2.0.0] - 2025-12-13
 
 ### 🚀 Features

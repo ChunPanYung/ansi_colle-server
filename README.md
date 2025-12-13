@@ -4,16 +4,18 @@ Collection of role for configuring home server.
 
 ## Requirements
 
-[Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
-Run this playbook from `bash`:
+Run following commands in `bash`:
 
 ```bash
+raw_content=https://raw.githubusercontent.com/ChunPanYung/ansi_colle-server/main
+curl "${raw_content}/bootstrap.bash"
+
+
 export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
 export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
 
 ansible-galaxy collection install \
-  git+https://github.com/ChunPanYung/ansi_colle-server.git
+    "git+https://github.com/ChunPanYung/ansi_colle-server.git"
 
 # Run this to update every time
 ansible-playbook ansi_colle.server.install
