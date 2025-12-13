@@ -3,7 +3,7 @@
 - name: Execute task file if it is RedHat-based OS
   when: ansible_os_family == 'RedHat'
   ansible.builtin.include_tasks:
-    file: _fedora.yml
+    file: _rhel.yml
 
 - name: Execute task file if it is Debian-based OS
   when: ansible_os_family == 'Debian'

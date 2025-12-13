@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2025-12-13
+
+### 🚀 Features
+
+- Use alternatives module.
+- Enable crb and epel on rhel base os.
+- [**breaking**] Remove rclone role.
+
+### 🐛 Bug Fixes
+
+- Do not install `lsd` and `micro` on rhel base os.
+
+### 🎨 Styling
+
+- Chnage file name.
+
 ## [1.6.1] - 2025-12-13
 
 ### 🐛 Bug Fixes
