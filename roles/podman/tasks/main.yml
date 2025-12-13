@@ -3,7 +3,7 @@
 - name: Install podman via dnf
   become: true
   when: ansible_os_family == 'RedHat'
-  ansible.builtin.dnf:
+  ansible.builtin.package:
     name:
       - podman
       - buildah
@@ -28,7 +28,9 @@
 
     - name: Copy timer file to override configuration for podman auto-update timer
       ansible.builtin.copy:
-        src: podman-auto-update.conf
+        content: |
+          [Timer]
+          OnCalendar=daily
         dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
         mode: '0644'
         backup: true
