@@ -9,13 +9,6 @@
       - curl
       - tree
 
-- name: Change default editor on RedHat based OS
-  when: ansible_os_family == 'RedHat'
-  become: true
-  ansible.builtin.dnf:
-    name: vim-default-editor
-    allowerasing: true
-
 - name: Install and enable sshd.service
   become: true
   ansible.builtin.package:
