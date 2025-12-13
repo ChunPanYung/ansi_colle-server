@@ -3,7 +3,6 @@
   become: true
   block:
     - name: Install mdns packages needed for Debian Based OS
-      when: ansible_os_family == 'Debian'
       ansible.builtin.apt:
         name:
           - systemd-resolved
