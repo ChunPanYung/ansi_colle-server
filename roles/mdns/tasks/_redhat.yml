@@ -3,7 +3,6 @@
   become: true
   block:
     - name: Install mdns packages needed for RedHat Based OS
-      when: ansible_os_family = 'RedHat'
       become: true
       ansible.builtin.dnf:
         name:
