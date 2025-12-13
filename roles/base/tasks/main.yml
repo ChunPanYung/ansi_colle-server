@@ -36,10 +36,20 @@
     mode: '0644'
     backup: true
 
-- name: Install EPEL for RedHat based OS
+- name: Enable and use repository on RHEL based OS
+  when: ansible_os_family == 'RedHat'
   become: true
-  ansible.builtin.dnf:
-    name: epel-release
+  block:
+    - name: Ensure the crb repository is enabled
+      community.general.dnf_config_manager:
+        name: crb
+        state: enabled
+
+    - name: Enable Extra Packages for Enterprise Linux
+      vars:
+        repo_link: https://dl.fedoraproject.org/pub/epel
+      ansible.builtin.dnf:
+        name: "{{ repo_link }}/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
 
 - name: Specific install for Debian based OS
   when: ansible_os_family == 'Debian'
