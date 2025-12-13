@@ -40,9 +40,10 @@
 
     - name: Enable Extra Packages for Enterprise Linux
       vars:
-        repo_link: https://dl.fedoraproject.org/pub/epel
+        base_epel: https://dl.fedoraproject.org/pub/epel
+        base_version: "{{ ansible_distribution_major_version | int }}"
       ansible.builtin.dnf:
-        name: "{{ repo_link }}/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+        name: "{{ base_epel }}/epel-release-latest-{{ base_version }}.noarch.rpm"
 
 - name: Specific install for Debian based OS
   when: ansible_os_family == 'Debian'

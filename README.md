@@ -4,27 +4,28 @@ Collection of role for configuring home server.
 
 ## Requirements
 
-Run following commands in `bash`:
+1. Ensure both `git` and `ansible-core` is installed
 
-```bash
-raw_content=https://raw.githubusercontent.com/ChunPanYung/ansi_colle-server/main
-curl "${raw_content}/bootstrap.bash"
+2. Run following commands in `bash`:
 
+  ```bash
+  ansible-galaxy collection install --upgrade community.general
 
-export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
-export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
+  export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
+  export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
 
-ansible-galaxy collection install \
-    "git+https://github.com/ChunPanYung/ansi_colle-server.git"
+  ansible-galaxy collection install \
+      "git+https://github.com/ChunPanYung/ansi_colle-server.git"
 
-# Run this to update every time
-ansible-playbook ansi_colle.server.install
+  # Run this to update every time
+  ansible-playbook ansi_colle.server.install
 
-# Run this after update, it will ask you sudo password
-ansible-playbook ansi_colle.server.site --connection=local \
-  --inventory 127.0.0.1, --ask-become-pass --verbose
-```
+  # Run this after update, it will ask you sudo password
+  ansible-playbook ansi_colle.server.site --connection=local \
+    --inventory 127.0.0.1, --verbose
+  ```
 
 ## Development
 
 To setup development environment: `uv sync && source .venv/bin/activate`
+Update all locked packages: `uv lock --upgrade`
