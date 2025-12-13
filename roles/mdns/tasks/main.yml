@@ -1,23 +1,18 @@
 ---
 # tasks file for ./roles/mdns
+- name: Execute task file if it is RedHat-based OS
+  when: ansible_os_family == 'RedHat'
+  ansible.builtin.include_tasks:
+    file: _fedora.yml
+
+- name: Execute task file if it is Debian-based OS
+  when: ansible_os_family == 'Debian'
+  ansible.builtin.include_tasks:
+    file: _debian.yml
+
 - name: Execute following with sudo
   become: true
   block:
-    - name: Install mdns packages needed for Debian Based OS
-      when: ansible_os_family == 'Debian'
-      ansible.builtin.apt:
-        name:
-          - systemd-resolved
-          - avahi-daemon
-
-    - name: Install mdns packages needed for RedHat Based OS
-      when: ansible_os_family = 'RedHat'
-      become: true
-      ansible.builtin.dnf:
-        name:
-          - nss-mdns
-          - avahi
-
     - name: Create directory for changing systemd default configuration
       ansible.builtin.file:
         path: /etc/systemd/resolved.conf.d

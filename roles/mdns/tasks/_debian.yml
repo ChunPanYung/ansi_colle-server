@@ -1,0 +1,25 @@
+---
+- name: Execute following with sudo
+  block:
+    - name: Install mdns packages needed for Debian Based OS
+      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+        name:
+          - systemd-resolved
+          - avahi-daemon
+
+    - name: Check if ufw is installed
+      failed_when: false
+      ansible.builtin.command:
+        cmd: command -v ufw
+      register: mdns_firewall_check
+
+    - name: Allow mDNS on ufw
+      when: mdns_firewall_check.rc == 0
+      community.general.ufw:
+        rule: allow
+        port: '5353'
+        proto: "{{ item }}"
+      loop:
+        - udp
+        - tcp
