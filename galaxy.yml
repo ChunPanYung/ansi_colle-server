@@ -14,5 +14,3 @@ repository: http://example.com/repository
 
 tags:
   - linux
-  - storage
-  - cloud

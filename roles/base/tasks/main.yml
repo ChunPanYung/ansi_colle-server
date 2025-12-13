@@ -41,7 +41,6 @@
   ansible.builtin.dnf:
     name: epel-release
 
-
 - name: Specific install for Debian based OS
   when: ansible_os_family == 'Debian'
   become: true
@@ -50,7 +49,7 @@
       ansible.builtin.apt:
         name: micro
       notify:
-        - Change 'EDITOR' variable in environment file
+        - Change default text editor to micro
 
     - name: Install lsd cli
       ansible.builtin.apt:

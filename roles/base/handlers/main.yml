@@ -11,13 +11,11 @@
     state: restarted
     enabled: true
 
-- name: Change 'EDITOR' variable in environment file
+- name: Change default text editor to micro
   become: true
-  ansible.builtin.lineinfile:
-    path: /etc/environment
-    regexp: '^EDITOR='
-    line: 'EDITOR="/usr/bin/micro"'
-    backup: true
+  community.general.alternativess:
+    name: editor
+    path: /usr/bin/micro
 
 - name: Create alias if 'bat' cli is installed
   when: ansible_os_family == 'Debian'
