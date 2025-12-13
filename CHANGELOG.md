@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2025-12-13
+
+### 🚀 Features
+
+- Setup mdns role.
+- [**breaking**] Remove onlyoffice role.
+
+### 🐛 Bug Fixes
+
+- Ansible-lint error.
+
+### 📚 Documentation
+
+- Fix outdated commands.
+- Install task also.
+
 ## [1.5.0] - 2025-12-04
 
 ### 🚀 Features

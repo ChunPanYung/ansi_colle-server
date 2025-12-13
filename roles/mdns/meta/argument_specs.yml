@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for mdns role.
+    description:
+      - Main entry point for mdns role.
+      - Setup and configure Mutlicast DNS (mDNS).
+    author: Chun Pan Yung
+    options: {}
