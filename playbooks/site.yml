@@ -4,8 +4,6 @@
   roles:
     - role: ansi_colle.server.base
       tags: base
-    - role: ansi_colle.server.rclone
-      tags: rclone
     - role: ansi_colle.server.auto_update
       tags: auto_update
     - role: ansi_colle.server.podman
