@@ -28,6 +28,7 @@
         mode: '0644'
 
     - name: Restart and enable systemd-resolved
+      when: ansible_os_family == 'Debian'
       ansible.builtin.systemd_service:
         name: systemd-resolved
         daemon_reload: true
