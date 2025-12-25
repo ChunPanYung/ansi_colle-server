@@ -36,7 +36,9 @@
     - name: Install micro text editor
       ansible.builtin.apt:
         name: micro
-      notify: Change default text editor to micro
+      notify:
+        - Change default text editor to micro
+        - Keep 'SYSTEMD_EDITOR' when using sudo
 
     - name: Install lsd cli
       ansible.builtin.apt:
