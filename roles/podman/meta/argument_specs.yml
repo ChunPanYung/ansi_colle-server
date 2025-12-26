@@ -6,4 +6,11 @@ argument_specs:
       - Main entrypoint for podman role.
     author:
       - Chun Pan Yung
-    options: {}
+    options:
+      podman_data_dir:
+        type: "str"
+        required: false
+        default: "/srv/containers"
+        description:
+          - "Local directory uses for all podman volumes."
+          - "It will change the SELinux context to 'container_file_t' recursively."
