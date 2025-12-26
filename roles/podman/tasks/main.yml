@@ -34,3 +34,18 @@
         dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
         mode: '0644'
         backup: true
+
+- name: Setup directory permission
+  become: true
+  block:
+    - name: Create directory for container data
+      ansible.builtin.file:
+        path: "{{ podman_data_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Setup SELinux context for 'containers' directory
+      community.general.sefcontext:
+        target: "{{ podman_data_dir }}(/*)?"
+        setype: container_file_t
+      notify: Apply new SELinux file context to filesystem
