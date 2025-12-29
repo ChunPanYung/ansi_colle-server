@@ -8,6 +8,6 @@ collections:
   - name: ansible.posix
     version: "*"
 
-  - name: https://github.com/ChunPanYung/ansi_colle-mods.git
+  - name: https://github.com/ChunPanYung/ansi_colle-server.git
     type: git
     version: main
