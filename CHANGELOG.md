@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2025-12-29
+
+### 🚀 Features
+
+- `extra` role, refactor `podman` role. (#32)
+- Enable local directory for podman volumes (#36)
+- Setup avahi daemon for redhat os
+- Bootstrap file
+- Github action for creating doc
+
+### 🐛 Bug Fixes
+
+- Syntax error (#33)
+
+### 🚜 Refactor
+
+- Migrate `epel` install to `base` role
+
+### 📚 Documentation
+
+- Docsite link
+
 ## [2.0.1] - 2025-12-13
 
 ### 🚀 Features
