@@ -12,7 +12,9 @@
 
 - name: Execute following with sudo
   become: true
-  notify: Restart and enable systemd-resolved
+  notify:
+    - Restart and enable systemd-resolved
+    - Restart and enable avahi daemon
   block:
     - name: Create directory for changing systemd default configuration
       ansible.builtin.file:
