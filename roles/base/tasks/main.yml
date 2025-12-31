@@ -39,6 +39,7 @@
       community.general.ufw:
         rule: allow
         name: OpenSSH
+        state: enabled
 
 - name: Enable and use repository on RHEL based OS
   when: ansible_os_family == 'RedHat'

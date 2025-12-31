@@ -13,6 +13,7 @@
         rule: allow
         port: '5353'
         proto: "{{ item }}"
+        state: enabled
       loop:
         - udp
         - tcp
