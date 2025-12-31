@@ -5,7 +5,7 @@ function setup-debian {
 	export DEBIAN_FRONTEND=noninteractive
 	apt install --yes openssh-server
 	systemctl enable --now ssh
-	command -v ufw && ufw allow ssh
+	command -v ufw && ufw allow OpenSSH
 
 	apt install --yes ansible-core
 }

@@ -31,15 +31,11 @@
 - name: Setup firewall rule on Debian based OS
   become: true
   block:
-    - name: Check if ufw is installed
-      failed_when: false
-      changed_when: false
-      ansible.builtin.command:
-        cmd: command -v ufw
-      register: base_firewall_check
+    - name: Ensure firewall is installed on Debian server
+      ansible.builtin.apt:
+        name: ufw
 
     - name: Allow OpenSSH on ufw
-      when: base_firewall_check.rc == 0
       community.general.ufw:
         rule: allow
         name: OpenSSH
