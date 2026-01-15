@@ -5,10 +5,23 @@
   ansible.builtin.package:
     name: tmux
 
+- name: Setup tmux config directory
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/tmux"
+    state: directory
+    mode: '0755'
+
+- name: Git clone tpm repo
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux-plugins/tpm.git'
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
+    version: master
+    update: false
+
 - name: Create tmux.conf file
   ansible.builtin.copy:
     src: tmux.conf
-    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    dest: "{{ ansible_user_dir }}/.config/tmux/tmux.conf"
     mode: '0644'
     backup: true
 
