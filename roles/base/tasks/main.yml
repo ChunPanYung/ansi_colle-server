@@ -15,17 +15,17 @@
     name: openssh-server
   notify: Enable and restart sshd.service
 
-- name: Setup firewall rule on RedHat based OS
+- name: Enable ssh on firewall-cmd on RedHat based OS
+  when: ansible_os_family == 'RedHat'
   become: true
-  block:
-    - name: Enable ssh on firewall-cmd
-      ansible.posix.firewalld:
-        service: ssh
-        state: enabled
-        permanent: true
-        immediate: true
+  ansible.posix.firewalld:
+    service: ssh
+    state: enabled
+    permanent: true
+    immediate: true
 
 - name: Setup firewall rule on Debian based OS
+  when: ansible_os_family == 'Debian'
   become: true
   block:
     - name: Ensure firewall is installed on Debian server
