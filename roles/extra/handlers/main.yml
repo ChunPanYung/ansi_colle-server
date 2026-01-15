@@ -1,20 +1,6 @@
 ---
 # roles/extras/handlers/
-- name: Change default text editor to micro
-  become: true
-  community.general.alternatives:
-    name: editor
-    path: /usr/bin/micro
-
-- name: Keep 'SYSTEMD_EDITOR' when using sudo
-  become: true
-  ansible.builtin.copy:
-    content: 'Defaults env_keep += "SYSTEMD_EDITOR EDITOR"'
-    dest: /etc/sudoers.d/env_keep
-    mode: '0644'
-
 - name: Create alias if 'bat' cli is installed
-  when: ansible_os_family == 'Debian'
   ansible.builtin.lineinfile:
     path: "{{ ansible_user_dir }}/.bashrc"
     regexp: '^alias bat='

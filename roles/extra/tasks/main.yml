@@ -5,27 +5,36 @@
   ansible.builtin.package:
     name: tmux
 
-- name: Setup tmux config directory
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/tmux"
-    state: directory
-    mode: '0755'
+- name: Setup tmux and tpm
+  block:
+    - name: Setup tmux config directory
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/tmux"
+        state: directory
+        mode: '0755'
 
-- name: Git clone tpm repo
-  ansible.builtin.git:
-    repo: 'https://github.com/tmux-plugins/tpm.git'
-    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
-    version: master
-    single_branch: true
-    depth: 1
-    update: false
+    - name: Git clone tpm repo
+      ansible.builtin.git:
+        repo: 'https://github.com/tmux-plugins/tpm.git'
+        dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
+        version: master
+        single_branch: true
+        depth: 1
+        update: false
 
-- name: Create tmux.conf file
+    - name: Create tmux.conf file
+      ansible.builtin.copy:
+        src: tmux.conf
+        dest: "{{ ansible_user_dir }}/.config/tmux/tmux.conf"
+        mode: '0644'
+        backup: true
+
+- name: Keep environment variables when using sudo
+  become: true
   ansible.builtin.copy:
-    src: tmux.conf
-    dest: "{{ ansible_user_dir }}/.config/tmux/tmux.conf"
+    content: 'Defaults env_keep += "SYSTEMD_EDITOR EDITOR"'
+    dest: /etc/sudoers.d/env_keep
     mode: '0644'
-    backup: true
 
 - name: Specific install for Debian based OS
   when: ansible_os_family == 'Debian'
@@ -34,9 +43,6 @@
     - name: Install micro text editor
       ansible.builtin.apt:
         name: micro
-      notify:
-        - Change default text editor to micro
-        - Keep 'SYSTEMD_EDITOR' when using sudo
 
     - name: Install lsd cli
       ansible.builtin.apt:
