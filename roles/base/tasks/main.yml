@@ -15,42 +15,28 @@
     name: openssh-server
   notify: Enable and restart sshd.service
 
-- name: Setup firewall rule on RedHat based OS
+- name: Enable ssh on firewall-cmd on RedHat based OS
+  when: ansible_facts['os_family'] == 'RedHat'
   become: true
-  block:
-    - name: Get default zone
-      failed_when: false
-      changed_when: false
-      ansible.builtin.command:
-        cmd: firewall-cmd --get-default-zone
-      register: base_firewall_check
-
-    - name: Enable ssh on firewall-cmd
-      when:
-        - base_firewall_check.rc == 0
-        - base_firewall_check.stdout | length > 1
-      ansible.posix.firewalld:
-        service: ssh
-        state: enabled
-        permanent: true
-        immediate: true
-        zone: "{{ base_firewall_check.stdout }}"
+  ansible.posix.firewalld:
+    service: ssh
+    state: enabled
+    permanent: true
+    immediate: true
 
 - name: Setup firewall rule on Debian based OS
+  when: ansible_facts['os_family'] == 'Debian'
   become: true
   block:
-    - name: Check if ufw is installed
-      failed_when: false
-      changed_when: false
-      ansible.builtin.command:
-        cmd: command -v ufw
-      register: base_firewall_check
+    - name: Ensure firewall is installed on Debian server
+      ansible.builtin.apt:
+        name: ufw
 
     - name: Allow OpenSSH on ufw
-      when: base_firewall_check.rc == 0
       community.general.ufw:
         rule: allow
         name: OpenSSH
+        state: enabled
 
 - name: Enable and use repository on RHEL based OS
   when: ansible_os_family == 'RedHat'

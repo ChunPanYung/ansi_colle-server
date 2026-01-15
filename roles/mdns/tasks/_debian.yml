@@ -8,19 +8,12 @@
           - systemd-resolved
           - avahi-daemon
 
-    - name: Check if ufw is installed
-      failed_when: false
-      changed_when: false
-      ansible.builtin.command:
-        cmd: command -v ufw
-      register: mdns_firewall_check
-
     - name: Allow mDNS on ufw
-      when: mdns_firewall_check.rc == 0
       community.general.ufw:
         rule: allow
         port: '5353'
         proto: "{{ item }}"
+        state: enabled
       loop:
         - udp
         - tcp
