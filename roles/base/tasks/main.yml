@@ -19,9 +19,6 @@
   become: true
   block:
     - name: Enable ssh on firewall-cmd
-      when:
-        - base_firewall_check.rc == 0
-        - base_firewall_check.stdout | length > 1
       ansible.posix.firewalld:
         service: ssh
         state: enabled
