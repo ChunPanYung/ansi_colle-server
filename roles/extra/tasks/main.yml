@@ -16,6 +16,8 @@
     repo: 'https://github.com/tmux-plugins/tpm.git'
     dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
     version: master
+    single_branch: true
+    depth: 1
     update: false
 
 - name: Create tmux.conf file
