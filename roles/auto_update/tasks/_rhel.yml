@@ -2,17 +2,27 @@
 - name: Execute following tasks with sudo
   become: true
   notify:
-    - Enable and restart dnf-automatic timer
+    - Restart dnf-automatic timer
   block:
     - name: Install dnf-automatic
       ansible.builtin.dnf:
         name: dnf-automatic
 
+    - name: Enable dnf-automatic timer
+      ansible.builtin.systemd_service:
+        name: dnf-automatic.timer
+        state: started
+        enabled: true
+
     - name: Configure dnf automatic.conf
       community.general.ini_file:
         path: /etc/dnf/automatic.conf
         section: commands
-        option: reboot
-        value: when-changed
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
         backup: true
         mode: '0644'
+      loop:
+        - { option: 'apply_updates', value: 'True' }
+        - { option: 'download_updates', value: 'True' }
+        - { option: 'reboot', value: 'when-changed' }
