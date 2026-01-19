@@ -4,9 +4,10 @@ Collection of role for configuring home server.
 
 ## Requirements
 
-1. Ensure both `git` and `ansible-core` is installed
+1. Execute [bootstrap.bash](bootstrap.bash)
+2. Run following command: `ansible-galaxy collection install commiunity.general`
 
-2. Run following commands in `bash`:
+3. Run following commands in `bash`:
 
   ```bash
   export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
