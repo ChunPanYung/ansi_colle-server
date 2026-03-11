@@ -15,9 +15,9 @@
 
     - name: Git clone tpm repo
       ansible.builtin.git:
-        repo: 'https://github.com/tmux-plugins/tpm.git'
+        repo: https://github.com/tmuxpack/tpack
         dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
-        version: master
+        version: main
         single_branch: true
         depth: 1
         update: false
