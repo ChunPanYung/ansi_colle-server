@@ -29,6 +29,37 @@
         mode: '0644'
         backup: true
 
+- name: Install and setup tmuxp
+  block:
+    - name: Install tmuxp
+      become: true
+      ansible.builtin.apt:
+        name: tmuxp
+
+    - name: Create tmuxp config directory
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/tmuxp"
+        state: directory
+        recurse: true
+        mode: '0755'
+      register: extra_tmuxp
+
+    - name: Create tmuxp session file
+      ansible.builtin.copy:
+        content: |
+          ---
+          session_name: preset
+          windows:
+            - window_name: editor
+              panes:
+                - shell_command:
+                    - nvim
+            - window_name: AI
+            - window_name: run
+            - window_name: bash
+        dest: "{{ extra_tmuxp.dest }}"
+        mode: '0644'
+
 - name: Keep environment variables when using sudo
   become: true
   ansible.builtin.copy:
