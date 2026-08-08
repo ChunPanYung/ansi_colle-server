@@ -57,7 +57,7 @@
             - window_name: AI
             - window_name: run
             - window_name: bash
-        dest: "{{ extra_tmuxp.dest }}"
+        dest: "{{ extra_tmuxp.path }}"
         mode: '0644'
 
 - name: Keep environment variables when using sudo
