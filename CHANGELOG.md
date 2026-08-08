@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-08-08
+
+### 🚀 Features
+
+- Install `tpm` and its plugins for `tmux` (#40)
+- Use tpack instead of tpm and change status bar (#42)
+- Tmux-resurrect (#43)
+- Tmuxp config and setup
+
+### 🐛 Bug Fixes
+
+- Update `gh_pages.yml` to use correct packages to generate docsite
+- Enable and apply dnf update automatically (#41)
+
+### 🚜 Refactor
+
+- Simplify firewall task and update when condition (#39)
+
+### ⚙️ Miscellaneous Tasks
+
+- Update pre-commit config file
+- Update python version
+
 ## [2.1.0] - 2025-12-29
 
 ### 🚀 Features
