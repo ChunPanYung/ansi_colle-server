@@ -40,7 +40,6 @@
       ansible.builtin.file:
         path: "{{ ansible_user_dir }}/.config/tmuxp"
         state: directory
-        recurse: true
         mode: '0755'
       register: extra_tmuxp
 
